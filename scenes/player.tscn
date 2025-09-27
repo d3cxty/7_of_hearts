@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8qvfwh3wep02"]
+[gd_scene load_steps=9 format=3 uid="uid://c8qvfwh3wep02"]
 
 [ext_resource type="Script" uid="uid://bgu7soejdto4f" path="res://scripts/Player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://d2wokjbvs2f33" path="res://addins/charachter/Hoodie Character.glb" id="2_qhqgy"]
@@ -25,7 +25,13 @@ states/CharacterArmature|Walk/node = SubResource("AnimationNodeAnimation_dqkch")
 states/CharacterArmature|Walk/position = Vector2(397, 50)
 states/Start/position = Vector2(179, 127)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_contact"]
+radius = 0.72753906
+height = 2.8
+
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 1
+collision_mask = 1
 script = ExtResource("1_g2els")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -47,5 +53,15 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.3361501e-08, -0.072813034, 0.26722443)
+
+[node name="ContactArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58200073, 0)
+collision_layer = 2
+collision_mask = 2
+monitoring = true
+monitorable = true
+
+[node name="ContactCollision" type="CollisionShape3D" parent="ContactArea"]
+shape = SubResource("CapsuleShape3D_contact")
 
 [editable path="Root Scene"]

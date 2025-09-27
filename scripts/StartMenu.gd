@@ -5,10 +5,9 @@ extends CanvasLayer
 @onready var join_game_button: Button = $CenterContainer/VBoxContainer/JoinGameButton
 
 func _ready():
-	# Debug: Check if nodes exist
 	print("=== StartMenu Debug ===")
 	print("name_input exists: ", name_input != null)
-	print("new_game_button exists: ", new_game_button != null) 
+	print("new_game_button exists: ", new_game_button != null)
 	print("join_game_button exists: ", join_game_button != null)
 	print("======================")
 	
@@ -23,7 +22,7 @@ func _ready():
 		print("Connected JOIN GAME button")
 	else:
 		print("ERROR: JoinGameButton not found!")
-	
+		
 	if name_input and name_input.text == "":
 		name_input.text = "Player" + str(randi() % 100)
 

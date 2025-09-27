@@ -1,44 +1,55 @@
 extends CanvasLayer
 
 @onready var player_list: VBoxContainer = $VBoxContainer
-@onready var timer_label: Label = $TimerLabel
-@onready var instruction_label: Label = $InstructionLabel
 
-var player_labels: Dictionary = {}
-var game_timer: float = 300.0  # 5 minutes in seconds
+var timer_label: Label
+var role_label: Label
+var player_labels = {}
+var game_timer: float = 180.0  # 3 minutes
 var game_active: bool = false
 
 func _ready():
-	# Create timer and instruction labels if they don't exist
-	setup_ui_elements()
-	
-	for player in get_tree().get_nodes_in_group("players"):
-		add_or_update_player(player)
-	get_tree().node_added.connect(_on_node_added)
+	setup_ui()
 
-func setup_ui_elements():
-	# Create timer label if it doesn't exist
-	if not timer_label:
-		timer_label = Label.new()
-		timer_label.name = "TimerLabel"
-		timer_label.position = Vector2(10, 10)
-		timer_label.add_theme_font_size_override("font_size", 24)
-		timer_label.add_theme_color_override("font_color", Color.WHITE)
-		add_child(timer_label)
+func setup_ui():
+	if not player_list:
+		print("ERROR: VBoxContainer not found!")
+		return
 	
-	# Create instruction label if it doesn't exist
-	if not instruction_label:
-		instruction_label = Label.new()
-		instruction_label.name = "InstructionLabel"
-		instruction_label.position = Vector2(10, 50)
-		instruction_label.size = Vector2(400, 100)
-		instruction_label.add_theme_font_size_override("font_size", 16)
-		instruction_label.add_theme_color_override("font_color", Color.YELLOW)
-		instruction_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		add_child(instruction_label)
+	# Timer
+	timer_label = Label.new()
+	timer_label.text = "Time: 03:00"
+	timer_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	timer_label.add_theme_font_size_override("font_size", 24)
+	player_list.add_child(timer_label)
 	
-	# Set initial instruction text
-	instruction_label.text = "HIDE N SEEK: Sheep must avoid the Wolf!\nIf Wolf touches a Sheep, they become the new Wolf!\nUse WASD to move, Shift to sprint, Mouse to look around."
+	# Your role
+	role_label = Label.new()
+	role_label.text = "Your Role: Unknown"
+	role_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	role_label.add_theme_font_size_override("font_size", 20)
+	player_list.add_child(role_label)
+	
+	# Instructions
+	var instructions = Label.new()
+	instructions.text = "Touch other players to swap roles! Wolf has speed advantage!"
+	instructions.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	instructions.add_theme_font_size_override("font_size", 16)
+	player_list.add_child(instructions)
+
+func start_game():
+	game_active = true
+	game_timer = 180.0
+	update_your_role()
+	
+	# Connect to all players for role updates
+	for player in get_tree().get_nodes_in_group("players"):
+		if player.has_signal("role_updated") and not player.role_updated.is_connected(_on_role_updated):
+			player.connect("role_updated", _on_role_updated)
+
+func _on_role_updated(_role: String, _player_name: String):
+	# Update display when any player's role changes
+	update_your_role()
 
 func _process(delta):
 	if game_active:
@@ -48,41 +59,51 @@ func _process(delta):
 		if game_timer <= 0:
 			end_game()
 
-func start_game():
-	game_active = true
-	game_timer = 300.0  # Reset to 5 minutes
-	instruction_label.text = "Game Started! Sheep hide from the Wolf!"
-
-func end_game():
-	game_active = false
-	instruction_label.text = "Time's Up! Game Over!"
-	# You can add end game logic here
-
 func update_timer_display():
-	var minutes = int(game_timer) / 60
+	var minutes = int(game_timer / 60)
 	var seconds = int(game_timer) % 60
 	timer_label.text = "Time: %02d:%02d" % [minutes, seconds]
 
-func _on_node_added(node):
-	if node.is_in_group("players"):
-		add_or_update_player(node)
+func update_your_role():
+	var local_player = get_local_player()
+	if local_player:
+		role_label.text = "Your Role: " + local_player.role
+		if local_player.role == "Wolf":
+			role_label.add_theme_color_override("font_color", Color.RED)
+			# Show wolf advantage info
+			var wolf_info = Label.new()
+			wolf_info.text = "Wolf Speed Boost: +25%"
+			wolf_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			wolf_info.add_theme_font_size_override("font_size", 14)
+			wolf_info.add_theme_color_override("font_color", Color.YELLOW)
+		else:
+			role_label.add_theme_color_override("font_color", Color.CYAN)
 
-func add_or_update_player(player):
-	var id = player.get_multiplayer_authority()
-	if id in player_labels:
-		player_labels[id].queue_free()
-	
-	var label = Label.new()
-	label.name = "PlayerLabel_" + str(id)
-	var player_role = player.role if "role" in player else "Unknown"
-	label.text = "%s [%s]" % [player.player_name if "player_name" in player else "Unknown", player_role]
-	player_list.add_child(label)
-	player_labels[id] = label
-	
-	if "role_updated" in player:
-		player.connect("role_updated", _on_role_updated.bind(player))
+func get_local_player():
+	var local_id = multiplayer.get_unique_id()
+	for player in get_tree().get_nodes_in_group("players"):
+		if is_instance_valid(player) and player.get_multiplayer_authority() == local_id:
+			return player
+	return null
 
-func _on_role_updated(role: String, player_name: String, player):
-	var id = player.get_multiplayer_authority()
-	if id in player_labels:
-		player_labels[id].text = "%s [%s]" % [player_name, role]
+func end_game():
+	game_active = false
+	timer_label.text = "GAME OVER!"
+	
+	# Find winner
+	var wolf = null
+	for player in get_tree().get_nodes_in_group("players"):
+		if is_instance_valid(player) and player.role == "Wolf":
+			wolf = player
+			break
+	
+	if wolf:
+		role_label.text = wolf.player_name + " (Wolf) WINS!"
+	else:
+		role_label.text = "Game Over!"
+	
+	# Return to menu after 5 seconds
+	await get_tree().create_timer(5.0).timeout
+	var main = get_tree().get_first_node_in_group("main")
+	if main:
+		main.show_start_menu()

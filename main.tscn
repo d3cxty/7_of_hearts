@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://1lpkmbxxba8g"]
+[gd_scene load_steps=22 format=3 uid="uid://1lpkmbxxba8g"]
 
 [ext_resource type="Script" uid="uid://bs6jm8j17663s" path="res://scripts/main.gd" id="1_kek77"]
 [ext_resource type="Texture2D" uid="uid://rmj0fk2255y1" path="res://addins/qwantani_dusk_2_puresky_4k.hdr" id="2_dg77c"]
 [ext_resource type="Script" uid="uid://b26p36r2b084p" path="res://scripts/StartMenu.gd" id="2_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://cf73iq574umi8" path="res://scenes/wall.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://bbovym70iftn5" path="res://scripts/HUD.gd" id="3_vivmo"]
 [ext_resource type="PackedScene" uid="uid://cbyvwbe0w1032" path="res://scenes/darkwood_tile.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bih5j1t8kv0gx" path="res://scenes/wall_half.tscn" id="4_kek77"]
 [ext_resource type="PackedScene" uid="uid://cn4euooti5vv8" path="res://scenes/corner.tscn" id="5_7mycd"]
@@ -12,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://baesd0bxv1chq" path="res://scenes/ceiling.tscn" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://jo72m6q8ti7j" path="res://scenes/torch mount.tscn" id="12_dg77c"]
 [ext_resource type="PackedScene" uid="uid://c3s8rpr7w37c2" path="res://scenes/barrel.tscn" id="13_ycdy4"]
+[ext_resource type="Script" uid="uid://c40j7370kb42d" path="res://scripts/lobby.gd" id="14_vivmo"]
 [ext_resource type="PackedScene" uid="uid://bmjpefxwavewh" path="res://scenes/stack.tscn" id="14_w48qg"]
 
 [sub_resource type="SystemFont" id="SystemFont_ycdy4"]
@@ -20,8 +22,6 @@ subpixel_positioning = 0
 [sub_resource type="Theme" id="Theme_w48qg"]
 default_font = SubResource("SystemFont_ycdy4")
 default_font_size = 40
-
-[sub_resource type="Theme" id="Theme_ycdy4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_efxa6"]
 panorama = ExtResource("2_dg77c")
@@ -36,6 +36,8 @@ sky = SubResource("Sky_dg77c")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="Theme" id="Theme_2cqfq"]
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_kek77")
 
@@ -43,8 +45,10 @@ script = ExtResource("1_kek77")
 script = ExtResource("2_ycdy4")
 
 [node name="CenterContainer" type="CenterContainer" parent="StartMenu"]
-offset_right = 1150.0
-offset_bottom = 191.0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 1159.0
+offset_bottom = 646.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StartMenu/CenterContainer"]
 layout_mode = 2
@@ -76,15 +80,11 @@ text = "JOIN GAME
 "
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("3_vivmo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="HUD/VBoxContainer"]
-layout_mode = 2
-theme = SubResource("Theme_ycdy4")
-text = "Players"
 
 [node name="GameWorld" type="Node3D" parent="."]
 
@@ -2600,3 +2600,50 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.799793, 0.18628716, 0.8043
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.842291, 0.18628733, -10.560412)
 
 [node name="PlayersContainer" type="Node3D" parent="."]
+
+[node name="LobbyMenu" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("14_vivmo")
+
+[node name="CenterContainer" type="CenterContainer" parent="LobbyMenu"]
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 1146.0
+offset_bottom = 638.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyMenu/CenterContainer"]
+layout_mode = 2
+theme = SubResource("Theme_2cqfq")
+theme_override_constants/separation = 10
+
+[node name="Players" type="Label" parent="LobbyMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.44422638, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "PLAYERS"
+
+[node name="PlayerList" type="VBoxContainer" parent="LobbyMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ReadyButton" type="Button" parent="LobbyMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "READY"
+
+[node name="StartButton" type="Button" parent="LobbyMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "START"
+
+[node name="BackButton" type="Button" parent="LobbyMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "BACK"
+
+[node name="StatusLabel" type="Label" parent="LobbyMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.6914364, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "STATUS"
