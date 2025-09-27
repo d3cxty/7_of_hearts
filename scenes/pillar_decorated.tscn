@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkic6gc38nosg"]
+
+[ext_resource type="PackedScene" uid="uid://dtks7dmy8t5cg" path="res://addins/Assets/gltf/pillar_decorated.gltf" id="1_cypuo"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_01pxi"]
+height = 4.0357056
+
+[node name="pillar" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9667664, 0)
+shape = SubResource("CylinderShape3D_01pxi")
+
+[node name="pillar_decorated2" parent="." instance=ExtResource("1_cypuo")]

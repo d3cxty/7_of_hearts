@@ -1,0 +1,2602 @@
+[gd_scene load_steps=20 format=3 uid="uid://1lpkmbxxba8g"]
+
+[ext_resource type="Script" uid="uid://bs6jm8j17663s" path="res://scripts/main.gd" id="1_kek77"]
+[ext_resource type="Texture2D" uid="uid://rmj0fk2255y1" path="res://addins/qwantani_dusk_2_puresky_4k.hdr" id="2_dg77c"]
+[ext_resource type="Script" uid="uid://b26p36r2b084p" path="res://scripts/StartMenu.gd" id="2_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://cf73iq574umi8" path="res://scenes/wall.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cbyvwbe0w1032" path="res://scenes/darkwood_tile.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bih5j1t8kv0gx" path="res://scenes/wall_half.tscn" id="4_kek77"]
+[ext_resource type="PackedScene" uid="uid://cn4euooti5vv8" path="res://scenes/corner.tscn" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://b84h0cj20c7y0" path="res://scenes/large_tile.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://eeejik8lfoox" path="res://scenes/wall_arched_window.tscn" id="6_efxa6"]
+[ext_resource type="PackedScene" uid="uid://baesd0bxv1chq" path="res://scenes/ceiling.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://jo72m6q8ti7j" path="res://scenes/torch mount.tscn" id="12_dg77c"]
+[ext_resource type="PackedScene" uid="uid://c3s8rpr7w37c2" path="res://scenes/barrel.tscn" id="13_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://bmjpefxwavewh" path="res://scenes/stack.tscn" id="14_w48qg"]
+
+[sub_resource type="SystemFont" id="SystemFont_ycdy4"]
+subpixel_positioning = 0
+
+[sub_resource type="Theme" id="Theme_w48qg"]
+default_font = SubResource("SystemFont_ycdy4")
+default_font_size = 40
+
+[sub_resource type="Theme" id="Theme_ycdy4"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_efxa6"]
+panorama = ExtResource("2_dg77c")
+energy_multiplier = 0.08
+
+[sub_resource type="Sky" id="Sky_dg77c"]
+sky_material = SubResource("PanoramaSkyMaterial_efxa6")
+
+[sub_resource type="Environment" id="Environment_ycdy4"]
+background_mode = 2
+sky = SubResource("Sky_dg77c")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_kek77")
+
+[node name="StartMenu" type="CanvasLayer" parent="."]
+script = ExtResource("2_ycdy4")
+
+[node name="CenterContainer" type="CenterContainer" parent="StartMenu"]
+offset_right = 1150.0
+offset_bottom = 191.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartMenu/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_w48qg")
+theme_type_variation = &"HeaderLarge"
+theme_override_colors/font_color = Color(1, 0.3749751, 0.4565437, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.83137256, 0, 0, 1)
+text = "HIDE N SEEK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameInput" type="LineEdit" parent="StartMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+keep_editing_on_text_submit = true
+backspace_deletes_composite_character_enabled = true
+
+[node name="NewGameButton" type="Button" parent="StartMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "NEWGAME"
+
+[node name="JoinGameButton" type="Button" parent="StartMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "JOIN GAME
+"
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="HUD/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ycdy4")
+text = "Players"
+
+[node name="GameWorld" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="GameWorld"]
+environment = SubResource("Environment_ycdy4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="GameWorld"]
+transform = Transform3D(0.8342947, -0.46084002, -0.3026201, 0.5504546, 0.7270042, 0.41044447, 0.030856844, -0.50901026, 0.8602072, 8.763642, 15.143444, 11.839067)
+light_color = Color(0, 0, 0, 1)
+light_energy = 2.59
+light_indirect_energy = 16.0
+light_volumetric_fog_energy = 10.937
+light_specular = 0.0
+shadow_enabled = true
+
+[node name="WALLS" type="Node3D" parent="GameWorld"]
+
+[node name="1_floor_walls" type="Node3D" parent="GameWorld/WALLS"]
+
+[node name="wall2" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.7703, -1.1765, 7.10565)
+
+[node name="wall5" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.7703, -1.1765, 10.9999)
+
+[node name="wall6" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.7703, -1.1765, 14.4594)
+
+[node name="wall8" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, -1.1765, 10.9999)
+
+[node name="wall9" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, -1.1765, 14.4594)
+
+[node name="wall21" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, -1.1765, -8.22528)
+
+[node name="wall23" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.76555, -1.1765, -8.89981)
+
+[node name="wall22" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, -1.1765, -8.63813)
+
+[node name="wall19" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, -1.1765, -0.341034)
+
+[node name="wall20" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, -1.1765, 3.11847)
+
+[node name="wall10" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.2793, -1.1765, 18.237)
+
+[node name="wall11" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 14.2686, -1.1765, 18.2404)
+
+[node name="wall12" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 18.2571, -1.1765, 18.2297)
+
+[node name="wall13" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 19.8471, -1.1765, 18.2248)
+
+[node name="wall16" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 18.2571, -1.1765, -12.5208)
+
+[node name="wall17" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 19.8471, -1.1765, -12.5257)
+
+[node name="2_walla_facing_each" type="StaticBody3D" parent="GameWorld/WALLS/1_floor_walls"]
+
+[node name="wall" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86936, -1.1765, -6.06655)
+
+[node name="wall3" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, -6.05741)
+
+[node name="wall4" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, 2.62638)
+
+[node name="wall24" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7337, -1.1765, 2.62638)
+
+[node name="2_walla_facing_each2" type="StaticBody3D" parent="GameWorld/WALLS/1_floor_walls"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.881426, 0, -16.500957)
+
+[node name="wall" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each2" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86936, -1.1765, -6.06655)
+
+[node name="wall3" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each2" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, -6.05741)
+
+[node name="wall4" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each2" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, 2.62638)
+
+[node name="wall24" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each2" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7337, -1.1765, 2.62638)
+
+[node name="2_walla_facing_each5" type="StaticBody3D" parent="GameWorld/WALLS/1_floor_walls"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.881, 4, -16.501)
+
+[node name="wall" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each5" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86936, -1.1765, -6.06655)
+
+[node name="wall3" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each5" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, -6.05741)
+
+[node name="wall4" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each5" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, 2.62638)
+
+[node name="wall24" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each5" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7337, -1.1765, 2.62638)
+
+[node name="2_walla_facing_each6" type="StaticBody3D" parent="GameWorld/WALLS/1_floor_walls"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.881, 4, -24.35732)
+
+[node name="wall" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each6" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86936, -1.1765, -6.06655)
+
+[node name="wall3" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each6" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, -6.05741)
+
+[node name="wall4" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each6" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, 2.62638)
+
+[node name="wall24" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each6" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7337, -1.1765, 2.62638)
+
+[node name="2_walla_facing_each7" type="StaticBody3D" parent="GameWorld/WALLS/1_floor_walls"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.881, 4, -32.213055)
+
+[node name="wall" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each7" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86936, -1.1765, -6.06655)
+
+[node name="wall3" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each7" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, -6.05741)
+
+[node name="wall4" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each7" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, 2.62638)
+
+[node name="wall24" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each7" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7337, -1.1765, 2.62638)
+
+[node name="2_walla_facing_each3" type="StaticBody3D" parent="GameWorld/WALLS/1_floor_walls"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.881426, 0, -24.260822)
+
+[node name="wall" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each3" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86936, -1.1765, -6.06655)
+
+[node name="wall3" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each3" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, -6.05741)
+
+[node name="wall24" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each3" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7337, -1.1765, 2.62638)
+
+[node name="2_walla_facing_each4" type="StaticBody3D" parent="GameWorld/WALLS/1_floor_walls"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.881426, 0, -32.08515)
+
+[node name="wall" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each4" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86936, -1.1765, -6.06655)
+
+[node name="wall3" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each4" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, -6.05741)
+
+[node name="wall4" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each4" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12348, -1.1765, 2.62638)
+
+[node name="wall24" parent="GameWorld/WALLS/1_floor_walls/2_walla_facing_each4" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7337, -1.1765, 2.62638)
+
+[node name="halfwall" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("4_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.012097, -0.06793296, -12.785946)
+
+[node name="halfwall2" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("4_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1302595, -0.06793296, -12.785946)
+
+[node name="2_fllor_walls" type="Node3D" parent="GameWorld/WALLS"]
+
+[node name="wall30" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.7703, 2.82207, 3.0823183)
+
+[node name="wall31" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.7703, 2.82207, -0.8791647)
+
+[node name="wall32" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.7703, 2.82207, -4.874551)
+
+[node name="wall5" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.7703, 2.82207, 10.9999)
+
+[node name="wall6" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.7703, 2.82207, 14.4594)
+
+[node name="wall7" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, 2.82207, 7.10565)
+
+[node name="wall9" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, 2.82207, 14.4594)
+
+[node name="wall18" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, 2.82207, -4.23532)
+
+[node name="wall21" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, 2.82207, -8.22528)
+
+[node name="wall23" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.76555, 2.82207, -8.89981)
+
+[node name="wall22" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, 2.82207, -8.63813)
+
+[node name="wall19" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, 2.82207, -0.341034)
+
+[node name="wall20" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.1982, 2.82207, 3.11847)
+
+[node name="wall10" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.2793, 2.82207, 18.237)
+
+[node name="wall12" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 18.2571, 2.82207, 18.2297)
+
+[node name="wall13" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 19.8471, 2.82207, 18.2248)
+
+[node name="wall14" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.2793, 2.82207, -12.5135)
+
+[node name="wall15" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 14.2686, 2.82207, -12.5101)
+
+[node name="wall16" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 18.2571, 2.82207, -12.5208)
+
+[node name="wall17" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 19.8471, 2.82207, -12.5257)
+
+[node name="wall25" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.824903, -1.0966423, 2.62638)
+
+[node name="wall29" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.192677, -1.0966423, 2.62638)
+
+[node name="wall26" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.701595, -1.0966423, 2.62638)
+
+[node name="wall28" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14.099943, -1.0966423, 5.603778)
+
+[node name="wall33" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14.424282, -1.0966423, 12.248621)
+
+[node name="wall34" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14.402697, -1.0966423, 16.245392)
+
+[node name="wall27" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.836622, -1.0966423, 2.62638)
+
+[node name="wall35" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.836622, -1.0966423, -5.941846)
+
+[node name="wall36" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 6.135516, -1.0966423, -3.7781708)
+
+[node name="wall_arched_window" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("6_efxa6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.005069, 3.902826, 18.001839)
+
+[node name="wall_arched_window2" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("6_efxa6")]
+transform = Transform3D(-0.027415698, 0, 0.99962413, 0, 1, 0, -0.99962413, 0, -0.027415698, 23.456182, 3.887222, 10.19714)
+
+[node name="wall_arched_window3" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("6_efxa6")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.0109897, 3.9072273, 6.768288)
+
+[node name="CORNERS" type="Node3D" parent="GameWorld"]
+
+[node name="corners_1" type="Node3D" parent="GameWorld/CORNERS"]
+
+[node name="StaticBody3D" parent="GameWorld/CORNERS/corners_1" instance=ExtResource("5_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.092773, 2.8609)
+
+[node name="StaticBody3D3" parent="GameWorld/CORNERS/corners_1" instance=ExtResource("5_7mycd")]
+transform = Transform3D(-0.99950993, 0, -0.031306185, 0, 1, 0, 0.031306185, 0, -0.99950993, 6.16, 0, 18.107828)
+
+[node name="StaticBody3D6" parent="GameWorld/CORNERS/corners_1" instance=ExtResource("5_7mycd")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, -0.092773, -12.6859)
+
+[node name="StaticBody3D4" parent="GameWorld/CORNERS/corners_1" instance=ExtResource("5_7mycd")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 23.5276, -0.092773, 17.9992)
+
+[node name="StaticBody3D5" parent="GameWorld/CORNERS/corners_1" instance=ExtResource("5_7mycd")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 23.4714, -0.092773, -12.7633)
+
+[node name="StaticBody3D2" parent="GameWorld/CORNERS/corners_1" instance=ExtResource("5_7mycd")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, -0.092773, -5.82056)
+
+[node name="corners_2" type="Node3D" parent="GameWorld/CORNERS"]
+
+[node name="StaticBody3D3" parent="GameWorld/CORNERS/corners_2" instance=ExtResource("5_7mycd")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 6, 3.9058, 17.9992)
+
+[node name="StaticBody3D6" parent="GameWorld/CORNERS/corners_2" instance=ExtResource("5_7mycd")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 3.9058, -12.6859)
+
+[node name="StaticBody3D4" parent="GameWorld/CORNERS/corners_2" instance=ExtResource("5_7mycd")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 23.5276, 3.9058, 17.9992)
+
+[node name="StaticBody3D5" parent="GameWorld/CORNERS/corners_2" instance=ExtResource("5_7mycd")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 23.4714, 3.9058, -12.7633)
+
+[node name="FLOORS" type="Node3D" parent="GameWorld"]
+
+[node name="interior_floor2" type="Node3D" parent="GameWorld/FLOORS"]
+
+[node name="StaticBody3D17" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44186, 0.154732, -3.57042)
+
+[node name="StaticBody3D18" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4445, 0.154732, -3.57042)
+
+[node name="StaticBody3D19" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4471, 0.154732, -3.57042)
+
+[node name="StaticBody3D20" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4337, 0.154732, -3.57042)
+
+[node name="StaticBody3D21" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4363, 0.154732, -3.57042)
+
+[node name="StaticBody3D42" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44186, 0.154732, -7.55338)
+
+[node name="StaticBody3D43" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4445, 0.154732, -7.55338)
+
+[node name="StaticBody3D44" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4471, 0.154732, -7.55338)
+
+[node name="StaticBody3D45" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4337, 0.154732, -7.55338)
+
+[node name="StaticBody3D46" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4363, 0.154732, -7.55338)
+
+[node name="StaticBody3D47" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44186, 0.154732, -11.5363)
+
+[node name="StaticBody3D48" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4445, 0.154732, -11.5363)
+
+[node name="StaticBody3D49" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4471, 0.154732, -11.5363)
+
+[node name="StaticBody3D50" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4337, 0.154732, -11.5363)
+
+[node name="StaticBody3D51" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4363, 0.154732, -11.5363)
+
+[node name="StaticBody3D22" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44186, 0.154732, 0.41607)
+
+[node name="StaticBody3D23" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4445, 0.154732, 0.41607)
+
+[node name="StaticBody3D24" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4471, 0.154732, 0.41607)
+
+[node name="StaticBody3D25" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4337, 0.154732, 0.41607)
+
+[node name="StaticBody3D58" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4337, 0.154732, 6.1026583)
+
+[node name="StaticBody3D26" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4363, 0.154732, 0.41607)
+
+[node name="StaticBody3D27" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44186, 0.154732, 4.43967)
+
+[node name="StaticBody3D28" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4445, 0.154732, 4.43967)
+
+[node name="StaticBody3D29" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4471, 0.154732, 4.43967)
+
+[node name="StaticBody3D30" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4337, 0.154732, 4.43967)
+
+[node name="StaticBody3D57" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4337, 0.154732, 4.43967)
+
+[node name="StaticBody3D31" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4363, 0.154732, 4.43967)
+
+[node name="StaticBody3D32" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44186, 0.154732, 8.38198)
+
+[node name="StaticBody3D33" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4445, 0.154732, 8.38198)
+
+[node name="StaticBody3D34" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4471, 0.154732, 8.38198)
+
+[node name="StaticBody3D35" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4337, 0.154732, 8.38198)
+
+[node name="StaticBody3D36" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4363, 0.154732, 8.38198)
+
+[node name="StaticBody3D37" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44186, 0.154732, 12.365)
+
+[node name="StaticBody3D38" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4445, 0.154732, 12.365)
+
+[node name="StaticBody3D39" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4471, 0.154732, 12.365)
+
+[node name="StaticBody3D40" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4337, 0.154732, 12.365)
+
+[node name="StaticBody3D41" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4363, 0.154732, 12.365)
+
+[node name="StaticBody3D52" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44186, 0.154732, 16.3073)
+
+[node name="StaticBody3D53" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4445, 0.154732, 16.3073)
+
+[node name="StaticBody3D54" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4471, 0.154732, 16.3073)
+
+[node name="StaticBody3D55" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4337, 0.154732, 16.3073)
+
+[node name="StaticBody3D56" parent="GameWorld/FLOORS/interior_floor2" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4363, 0.154732, 16.3073)
+
+[node name="outer_floor2" type="Node3D" parent="GameWorld/FLOORS"]
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/outer_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.391451, 0, -15.957129)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor2" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.391451, 0, -23.837553)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor2" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor3" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.391451, 0, -31.772438)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor3" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor4" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.230167, 0, -15.957129)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor4" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor5" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.230167, 0, -23.837553)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor5" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor6" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.230167, 0, -31.772438)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor6" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor7" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.096077, 0, -15.957129)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor7" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor8" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.096077, 0, -23.837553)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor8" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor9" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.096077, 0, -31.772438)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor9" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor10" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.096077, 0, 7.8113117)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor10" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor11" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.096077, 0, -0.06911278)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor11" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor12" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.096077, 0, -8.003999)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor12" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor13" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.979218, 0, -15.957129)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor13" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor14" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.979218, 0, -23.837553)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor14" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor15" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.979218, 0, -31.772438)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor15" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor16" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.979218, 0, 7.8113117)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor16" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor17" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.979218, 0, -0.06911278)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor17" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor18" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.979218, 0, -8.003999)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor18" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor19" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.951145, 0, 15.219426)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor19" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor21" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.634361, 0, -23.837553)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor21" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor22" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.634361, 0, -31.772438)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor22" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor23" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.634361, 0, 7.8113117)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor23" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor24" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.634361, 0, -0.06911278)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor24" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor25" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.634361, 0, -8.003999)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor25" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor26" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.606289, 0, 15.219426)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor26" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="wood_floor20" type="Node3D" parent="GameWorld/FLOORS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.0394, 0, 15.219426)
+
+[node name="StaticBody3D" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -4.36246)
+
+[node name="StaticBody3D16" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13884, 0.174966, -4.36246)
+
+[node name="StaticBody3D14" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81745, 0.174966, -4.36246)
+
+[node name="StaticBody3D15" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79456, 0.174966, -4.36246)
+
+[node name="StaticBody3D2" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -0.41499)
+
+[node name="StaticBody3D11" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92151, 0.174966, -0.41499)
+
+[node name="StaticBody3D12" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -0.41499)
+
+[node name="StaticBody3D13" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85699, 0.174966, -0.41499)
+
+[node name="StaticBody3D4" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, 1.53496)
+
+[node name="StaticBody3D5" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87101, 0.174966, 1.53496)
+
+[node name="StaticBody3D6" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79542, 0.174966, 1.53496)
+
+[node name="StaticBody3D7" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 0.174966, 1.52999)
+
+[node name="StaticBody3D3" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11594, 0.174966, -2.386)
+
+[node name="StaticBody3D8" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9007, 0.174966, -2.386)
+
+[node name="StaticBody3D9" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09721, 0.174966, -2.386)
+
+[node name="StaticBody3D10" parent="GameWorld/FLOORS/wood_floor20" instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.90706, 0.174966, -2.386)
+
+[node name="CEIL" type="Node3D" parent="GameWorld"]
+
+[node name="ceiling" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4918149, 3.9025717, 0.55255437)
+
+[node name="ceiling2" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48865014, 3.9025717, -3.413555)
+
+[node name="ceiling57" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0831945, 3.9025717, 0.55255437)
+
+[node name="ceiling58" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0831945, 3.9025717, -3.413555)
+
+[node name="ceiling3" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4768257, 3.9025717, 0.55255437)
+
+[node name="ceiling4" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4757266, 3.9025717, -3.4115288)
+
+[node name="ceiling5" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 0.55255437)
+
+[node name="ceiling6" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, -3.413555)
+
+[node name="ceiling7" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, 0.55255437)
+
+[node name="ceiling8" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.040521, 7.8088923, -3.4115288)
+
+[node name="ceiling9" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 0.55255437)
+
+[node name="ceiling10" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -3.413555)
+
+[node name="ceiling11" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 0.55255437)
+
+[node name="ceiling12" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, -3.4115288)
+
+[node name="ceiling13" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 0.55255437)
+
+[node name="ceiling14" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -3.413555)
+
+[node name="ceiling15" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 0.55255437)
+
+[node name="ceiling16" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, -3.4115288)
+
+[node name="ceiling17" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, 0.55255437)
+
+[node name="ceiling18" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, -7.342454)
+
+[node name="ceiling19" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, -11.308563)
+
+[node name="ceiling20" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.071134, 7.8088923, -7.342454)
+
+[node name="ceiling21" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.056545, 7.8088923, -11.306537)
+
+[node name="ceiling22" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -7.342454)
+
+[node name="ceiling23" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -11.308563)
+
+[node name="ceiling24" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, -7.342454)
+
+[node name="ceiling25" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, -11.306537)
+
+[node name="ceiling26" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -7.342454)
+
+[node name="ceiling27" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -11.308563)
+
+[node name="ceiling28" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, -7.342454)
+
+[node name="ceiling29" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, -11.306537)
+
+[node name="ceiling30" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, -7.342454)
+
+[node name="ceiling31" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 8.538988)
+
+[node name="ceiling32" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 4.548957)
+
+[node name="ceiling33" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, 8.538988)
+
+[node name="ceiling34" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, 4.5509834)
+
+[node name="ceiling35" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 8.538988)
+
+[node name="ceiling36" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 4.548957)
+
+[node name="ceiling37" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 8.538988)
+
+[node name="ceiling38" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, 4.5509834)
+
+[node name="ceiling39" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 8.538988)
+
+[node name="ceiling40" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 4.548957)
+
+[node name="ceiling41" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 8.538988)
+
+[node name="ceiling42" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, 4.5509834)
+
+[node name="ceiling43" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, 8.538988)
+
+[node name="ceiling44" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 16.441345)
+
+[node name="ceiling45" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 12.475237)
+
+[node name="ceiling46" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, 16.441345)
+
+[node name="ceiling47" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, 12.477263)
+
+[node name="ceiling48" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 16.441345)
+
+[node name="ceiling49" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 12.475237)
+
+[node name="ceiling50" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 16.441345)
+
+[node name="ceiling51" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, 12.477263)
+
+[node name="ceiling52" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 16.441345)
+
+[node name="ceiling53" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 12.475237)
+
+[node name="ceiling54" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 16.441345)
+
+[node name="ceiling55" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, 12.477263)
+
+[node name="ceiling56" parent="GameWorld/CEIL" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, 16.441345)
+
+[node name="CEIL2" type="Node3D" parent="GameWorld"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.73544, 0, 0)
+
+[node name="ceiling5" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 0.55255437)
+
+[node name="ceiling6" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, -3.413555)
+
+[node name="ceiling7" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, 0.55255437)
+
+[node name="ceiling8" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, -3.4115288)
+
+[node name="ceiling9" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 0.55255437)
+
+[node name="ceiling10" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -3.413555)
+
+[node name="ceiling11" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 0.55255437)
+
+[node name="ceiling12" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, -3.4115288)
+
+[node name="ceiling13" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 0.55255437)
+
+[node name="ceiling14" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -3.413555)
+
+[node name="ceiling15" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 0.55255437)
+
+[node name="ceiling16" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, -3.4115288)
+
+[node name="ceiling17" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, 0.55255437)
+
+[node name="ceiling18" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, -7.342454)
+
+[node name="ceiling19" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, -11.308563)
+
+[node name="ceiling20" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, -7.342454)
+
+[node name="ceiling21" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, -11.306537)
+
+[node name="ceiling22" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -7.342454)
+
+[node name="ceiling23" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -11.308563)
+
+[node name="ceiling24" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, -7.342454)
+
+[node name="ceiling25" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, -11.306537)
+
+[node name="ceiling26" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -7.342454)
+
+[node name="ceiling27" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -11.308563)
+
+[node name="ceiling28" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, -7.342454)
+
+[node name="ceiling29" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, -11.306537)
+
+[node name="ceiling30" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, -7.342454)
+
+[node name="ceiling31" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 8.538988)
+
+[node name="ceiling32" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 4.548957)
+
+[node name="ceiling33" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, 8.538988)
+
+[node name="ceiling34" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, 4.5509834)
+
+[node name="ceiling35" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 8.538988)
+
+[node name="ceiling36" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 4.548957)
+
+[node name="ceiling37" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 8.538988)
+
+[node name="ceiling38" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, 4.5509834)
+
+[node name="ceiling39" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 8.538988)
+
+[node name="ceiling40" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 4.548957)
+
+[node name="ceiling41" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 8.538988)
+
+[node name="ceiling42" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, 4.5509834)
+
+[node name="ceiling43" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, 8.538988)
+
+[node name="ceiling44" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 16.441345)
+
+[node name="ceiling45" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 12.475237)
+
+[node name="ceiling46" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, 16.441345)
+
+[node name="ceiling47" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, 12.477263)
+
+[node name="ceiling48" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 16.441345)
+
+[node name="ceiling49" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 12.475237)
+
+[node name="ceiling50" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 16.441345)
+
+[node name="ceiling51" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, 12.477263)
+
+[node name="ceiling52" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 16.441345)
+
+[node name="ceiling53" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 12.475237)
+
+[node name="ceiling54" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 16.441345)
+
+[node name="ceiling55" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, 12.477263)
+
+[node name="ceiling56" parent="GameWorld/CEIL2" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, 16.441345)
+
+[node name="CEIL3" type="Node3D" parent="GameWorld"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.73544, 0, -31.547756)
+
+[node name="ceiling5" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 0.55255437)
+
+[node name="ceiling6" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, -3.413555)
+
+[node name="ceiling7" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, 0.55255437)
+
+[node name="ceiling8" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, -3.4115288)
+
+[node name="ceiling9" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 0.55255437)
+
+[node name="ceiling10" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -3.413555)
+
+[node name="ceiling11" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 0.55255437)
+
+[node name="ceiling12" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, -3.4115288)
+
+[node name="ceiling13" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 0.55255437)
+
+[node name="ceiling14" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -3.413555)
+
+[node name="ceiling15" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 0.55255437)
+
+[node name="ceiling16" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, -3.4115288)
+
+[node name="ceiling17" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, 0.55255437)
+
+[node name="ceiling18" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, -7.342454)
+
+[node name="ceiling19" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, -11.308563)
+
+[node name="ceiling20" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, -7.342454)
+
+[node name="ceiling21" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, -11.306537)
+
+[node name="ceiling22" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -7.342454)
+
+[node name="ceiling23" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -11.308563)
+
+[node name="ceiling24" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, -7.342454)
+
+[node name="ceiling25" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, -11.306537)
+
+[node name="ceiling26" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -7.342454)
+
+[node name="ceiling27" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -11.308563)
+
+[node name="ceiling28" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, -7.342454)
+
+[node name="ceiling29" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, -11.306537)
+
+[node name="ceiling30" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, -7.342454)
+
+[node name="ceiling31" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 8.538988)
+
+[node name="ceiling32" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 4.548957)
+
+[node name="ceiling33" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, 8.538988)
+
+[node name="ceiling34" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, 4.5509834)
+
+[node name="ceiling35" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 8.538988)
+
+[node name="ceiling36" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 4.548957)
+
+[node name="ceiling37" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 8.538988)
+
+[node name="ceiling38" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, 4.5509834)
+
+[node name="ceiling39" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 8.538988)
+
+[node name="ceiling40" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 4.548957)
+
+[node name="ceiling41" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 8.538988)
+
+[node name="ceiling42" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, 4.5509834)
+
+[node name="ceiling43" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, 8.538988)
+
+[node name="ceiling44" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 16.441345)
+
+[node name="ceiling45" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 12.475237)
+
+[node name="ceiling46" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, 16.441345)
+
+[node name="ceiling47" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, 12.477263)
+
+[node name="ceiling48" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 16.441345)
+
+[node name="ceiling49" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 12.475237)
+
+[node name="ceiling50" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 16.441345)
+
+[node name="ceiling51" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, 12.477263)
+
+[node name="ceiling52" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 16.441345)
+
+[node name="ceiling53" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 12.475237)
+
+[node name="ceiling54" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 16.441345)
+
+[node name="ceiling55" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, 12.477263)
+
+[node name="ceiling56" parent="GameWorld/CEIL3" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, 16.441345)
+
+[node name="CEIL4" type="Node3D" parent="GameWorld"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17840195, 0, -31.547756)
+
+[node name="ceiling5" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 0.55255437)
+
+[node name="ceiling6" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, -3.413555)
+
+[node name="ceiling7" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, 0.55255437)
+
+[node name="ceiling8" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, -3.4115288)
+
+[node name="ceiling9" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 0.55255437)
+
+[node name="ceiling10" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -3.413555)
+
+[node name="ceiling11" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 0.55255437)
+
+[node name="ceiling12" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, -3.4115288)
+
+[node name="ceiling13" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 0.55255437)
+
+[node name="ceiling14" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -3.413555)
+
+[node name="ceiling15" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 0.55255437)
+
+[node name="ceiling16" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, -3.4115288)
+
+[node name="ceiling17" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, 0.55255437)
+
+[node name="ceiling18" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, -7.342454)
+
+[node name="ceiling19" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, -11.308563)
+
+[node name="ceiling20" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, -7.342454)
+
+[node name="ceiling21" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, -11.306537)
+
+[node name="ceiling22" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -7.342454)
+
+[node name="ceiling23" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -11.308563)
+
+[node name="ceiling24" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, -7.342454)
+
+[node name="ceiling25" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, -11.306537)
+
+[node name="ceiling26" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -7.342454)
+
+[node name="ceiling27" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, -11.308563)
+
+[node name="ceiling28" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, -7.342454)
+
+[node name="ceiling29" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, -11.306537)
+
+[node name="ceiling30" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, -7.342454)
+
+[node name="ceiling31" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 8.538988)
+
+[node name="ceiling32" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 4.548957)
+
+[node name="ceiling33" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, 8.538988)
+
+[node name="ceiling34" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, 4.5509834)
+
+[node name="ceiling35" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 8.538988)
+
+[node name="ceiling36" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 4.548957)
+
+[node name="ceiling37" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 8.538988)
+
+[node name="ceiling38" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, 4.5509834)
+
+[node name="ceiling39" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 8.538988)
+
+[node name="ceiling40" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 4.548957)
+
+[node name="ceiling41" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 8.538988)
+
+[node name="ceiling42" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, 4.5509834)
+
+[node name="ceiling43" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, 8.538988)
+
+[node name="ceiling44" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 16.441345)
+
+[node name="ceiling45" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0504045, 7.8088923, 12.475237)
+
+[node name="ceiling46" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.041849, 7.8088923, 16.441345)
+
+[node name="ceiling47" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04075, 7.8088923, 12.477263)
+
+[node name="ceiling48" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 16.441345)
+
+[node name="ceiling49" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 12.475237)
+
+[node name="ceiling50" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 16.441345)
+
+[node name="ceiling51" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.02419, 7.8088923, 12.477263)
+
+[node name="ceiling52" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 16.441345)
+
+[node name="ceiling53" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.051771, 7.8088923, 12.475237)
+
+[node name="ceiling54" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.043217, 7.8088923, 16.441345)
+
+[node name="ceiling55" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.045856, 7.8088923, 12.477263)
+
+[node name="ceiling56" parent="GameWorld/CEIL4" instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.993736, 7.8088923, 16.441345)
+
+[node name="torches" type="StaticBody3D" parent="GameWorld"]
+transform = Transform3D(0.9383543, 0.22695161, -0.2607377, 0.10791476, 0.52425826, 0.84469384, 0.32839844, -0.82075965, 0.46744853, 7.8242455, 3.83543, 16.984932)
+
+[node name="torch mount" parent="GameWorld/torches" instance=ExtResource("12_dg77c")]
+transform = Transform3D(-0.9383545, 0.10791476, -0.32839864, -0.22695166, 0.5242582, 0.82075965, 0.2607377, 0.8446939, -0.4674486, 0.007048607, -0.8456726, 0.22048092)
+
+[node name="torch mount2" parent="GameWorld/torches" instance=ExtResource("12_dg77c")]
+transform = Transform3D(-0.9383545, 0.107914746, -0.32839864, -0.22695167, 0.5242582, 0.82075965, 0.26073763, 0.8446939, -0.4674486, 12.028057, 2.3030381, -3.3071012)
+
+[node name="torch mount4" parent="GameWorld/torches" instance=ExtResource("12_dg77c")]
+transform = Transform3D(-0.11521864, 0.07171721, -0.99074787, -0.8411171, 0.5235495, 0.13571556, 0.5284384, 0.8489716, -7.4505806e-08, 4.1247654, 25.380955, -16.425648)
+
+[node name="torch mount6" parent="GameWorld/torches" instance=ExtResource("12_dg77c")]
+transform = Transform3D(-0.11521864, 0.07171717, -0.99074787, -0.8411171, 0.5235497, 0.13571556, 0.5284384, 0.84897155, -7.4505806e-08, -15.252349, 14.646845, -12.24272)
+
+[node name="torch mount5" parent="GameWorld/torches" instance=ExtResource("12_dg77c")]
+transform = Transform3D(-0.69902307, 0.12824975, 0.7035049, 0.6410545, 0.54833454, 0.53700876, -0.31688508, 0.82636654, -0.4655131, -7.0188804, 15.421477, -8.145266)
+
+[node name="props" type="StaticBody3D" parent="GameWorld"]
+
+[node name="barrel" parent="GameWorld/props" instance=ExtResource("13_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.128555, 0.18628716, 0.8043294)
+
+[node name="barrel4" parent="GameWorld/props" instance=ExtResource("13_ycdy4")]
+transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, 19.128555, 0.98728156, -10.289137)
+
+[node name="barrel5" parent="GameWorld/props" instance=ExtResource("13_ycdy4")]
+transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, 19.128555, 0.98728156, -9.113296)
+
+[node name="barrel6" parent="GameWorld/props" instance=ExtResource("13_ycdy4")]
+transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, 19.128555, 1.9165609, -9.524788)
+
+[node name="barrel7" parent="GameWorld/props" instance=ExtResource("13_ycdy4")]
+transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, 10.127378, 0.98728156, -4.236403)
+
+[node name="barrel8" parent="GameWorld/props" instance=ExtResource("13_ycdy4")]
+transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, 10.127378, 0.98728156, -3.0605617)
+
+[node name="barrel9" parent="GameWorld/props" instance=ExtResource("13_ycdy4")]
+transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, 10.127378, 1.9165609, -3.472054)
+
+[node name="barrel2" parent="GameWorld/props" instance=ExtResource("13_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.799793, 0.18628716, 0.8043294)
+
+[node name="stack" parent="GameWorld/props" instance=ExtResource("14_w48qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.842291, 0.18628733, -10.560412)
+
+[node name="PlayersContainer" type="Node3D" parent="."]

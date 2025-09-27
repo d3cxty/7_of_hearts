@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8qvfwh3wep02"]
+
+[ext_resource type="Script" uid="uid://bgu7soejdto4f" path="res://scripts/Player.gd" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://d2wokjbvs2f33" path="res://addins/charachter/Hoodie Character.glb" id="2_qhqgy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5rwf"]
+radius = 0.38964844
+height = 2.5316772
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g2els"]
+animation = &"CharacterArmature|Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qhqgy"]
+animation = &"CharacterArmature|Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dqkch"]
+animation = &"CharacterArmature|Walk"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_igl26"]
+states/CharacterArmature|Idle/node = SubResource("AnimationNodeAnimation_g2els")
+states/CharacterArmature|Idle/position = Vector2(352, 139)
+states/CharacterArmature|Run/node = SubResource("AnimationNodeAnimation_qhqgy")
+states/CharacterArmature|Run/position = Vector2(641, 131)
+states/CharacterArmature|Walk/node = SubResource("AnimationNodeAnimation_dqkch")
+states/CharacterArmature|Walk/position = Vector2(397, 50)
+states/Start/position = Vector2(179, 127)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_g2els")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58200073, 0)
+shape = SubResource("CapsuleShape3D_e5rwf")
+
+[node name="Root Scene" parent="." instance=ExtResource("2_qhqgy")]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Root Scene")
+tree_root = SubResource("AnimationNodeStateMachine_igl26")
+anim_player = NodePath("../Root Scene/AnimationPlayer")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8635037, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.6721613, 0.26722443)
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.3361501e-08, -0.072813034, 0.26722443)
+
+[editable path="Root Scene"]

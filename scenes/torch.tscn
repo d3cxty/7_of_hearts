@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://xo8rdihkreag"]
+
+[ext_resource type="PackedScene" uid="uid://buxuuugc42jc3" path="res://addins/Assets/gltf/torch_lit.gltf" id="1_pa17o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s1444"]
+size = Vector3(0.1402705, 0.9785156, 0.27358317)
+
+[node name="torch" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.085248545, 0.0107421875, 0.03390199)
+shape = SubResource("BoxShape3D_s1444")
+
+[node name="torch_lit2" parent="." instance=ExtResource("1_pa17o")]

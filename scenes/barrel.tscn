@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3s8rpr7w37c2"]
+
+[ext_resource type="PackedScene" uid="uid://i2p3ssyp7ppr" path="res://addins/Assets/gltf/barrel_large.gltf" id="1_n8un1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a12vh"]
+size = Vector3(1.1405029, 1.0740662, 1.1644287)
+
+[node name="barrel" type="StaticBody3D"]
+
+[node name="barrel_large2" parent="." instance=ExtResource("1_n8un1")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.070251465, 1.0313241, 0.011047363)
+shape = SubResource("BoxShape3D_a12vh")

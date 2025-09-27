@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://jo72m6q8ti7j"]
+
+[ext_resource type="PackedScene" uid="uid://c10rw1h3ykupr" path="res://addins/Assets/gltf/torch_mounted.gltf" id="1_gcah7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_66rpl"]
+size = Vector3(0.078552246, 1.0665283, 0.29369354)
+
+[node name="torch mount" type="StaticBody3D"]
+
+[node name="torch_mounted2" parent="." instance=ExtResource("1_gcah7")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009124756, 0.03326416, 0.14919662)
+shape = SubResource("BoxShape3D_66rpl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.71237284, 0.3477056)
+light_color = Color(1, 0.8152507, 0.16007765, 1)
+light_energy = 4.2
+shadow_enabled = true
+omni_range = 15.0

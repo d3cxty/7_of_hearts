@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://qx28vqjkddyq"]
+
+[ext_resource type="PackedScene" uid="uid://ud05kl46exha" path="res://addins/charachter/Animated Woman.glb" id="1_so33h"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lbwyf"]
+radius = 0.40722656
+height = 2.1791992
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+
+[node name="Root Scene" parent="." instance=ExtResource("1_so33h")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05183363, 0.7512207, 0)
+shape = SubResource("CapsuleShape3D_lbwyf")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+transform = Transform3D(-0.9991432, 0, -0.041387327, 0, 1, 0, 0.041387327, 0, -0.9991432, 0, 1.5947021, 0.22597796)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(-0.99989736, 0, 0.014328618, 0, 1, 0, -0.014328618, 0, -0.99989736, 0, 1.6432133, 0)
+target_position = Vector3(0, 0, -3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

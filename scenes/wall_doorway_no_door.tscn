@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://4qsg24j2fpcx"]
+
+[ext_resource type="PackedScene" uid="uid://dmfogaewu4yut" path="res://addins/Assets/gltf/wall_doorway.gltf" id="1_ke04f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dlm3k"]
+size = Vector3(4.0102234, 4.5359955, 1)
+
+[node name="StaticBody3D" type="StaticBody3D"]
+
+[node name="wall_doorway2" parent="." instance=ExtResource("1_ke04f")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006210327, 1.7679977, 0)
+shape = SubResource("BoxShape3D_dlm3k")

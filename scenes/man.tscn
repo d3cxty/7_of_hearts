@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://bagm6dcnuth02"]
+
+[ext_resource type="Script" uid="uid://bgu7soejdto4f" path="res://scripts/Player.gd" id="1_yfvi0"]
+[ext_resource type="PackedScene" uid="uid://d2wokjbvs2f33" path="res://addins/charachter/Hoodie Character.glb" id="2_8us7u"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5rwf"]
+radius = 0.38964844
+height = 2.5316772
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x8muw"]
+animation = &"CharacterArmature|Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_765v2"]
+animation = &"CharacterArmature|Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kfdv6"]
+animation = &"CharacterArmature|Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6cgf6"]
+switch_mode = 1
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_51cum"]
+switch_mode = 1
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_igl26"]
+states/Start/position = Vector2(179, 127)
+states/idle/node = SubResource("AnimationNodeAnimation_x8muw")
+states/idle/position = Vector2(365, 127)
+states/run/node = SubResource("AnimationNodeAnimation_765v2")
+states/run/position = Vector2(715, 127)
+states/walk/node = SubResource("AnimationNodeAnimation_kfdv6")
+states/walk/position = Vector2(583, 127)
+transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_6cgf6"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_51cum")]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_yfvi0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58200073, 0)
+shape = SubResource("CapsuleShape3D_e5rwf")
+
+[node name="Root Scene" parent="." instance=ExtResource("2_8us7u")]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, 1.6721613, 0.26722443)
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5993483, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Root Scene")
+tree_root = SubResource("AnimationNodeStateMachine_igl26")
+anim_player = NodePath("../Root Scene/AnimationPlayer")
+
+[editable path="Root Scene"]
