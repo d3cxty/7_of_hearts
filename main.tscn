@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://1lpkmbxxba8g"]
+[gd_scene load_steps=22 format=3 uid="uid://1lpkmbxxba8g"]
 
 [ext_resource type="Script" uid="uid://bs6jm8j17663s" path="res://scripts/main.gd" id="1_kek77"]
 [ext_resource type="Texture2D" uid="uid://rmj0fk2255y1" path="res://addins/qwantani_dusk_2_puresky_4k.hdr" id="2_dg77c"]
 [ext_resource type="Script" uid="uid://b26p36r2b084p" path="res://scripts/StartMenu.gd" id="2_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://cf73iq574umi8" path="res://scenes/wall.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://bbovym70iftn5" path="res://scripts/HUD.gd" id="3_vivmo"]
 [ext_resource type="Texture2D" uid="uid://cdvjdnpwmagof" path="res://addins/images/IMAGE.png" id="3_yaehf"]
 [ext_resource type="PackedScene" uid="uid://cbyvwbe0w1032" path="res://scenes/darkwood_tile.tscn" id="4_1bvp3"]
 [ext_resource type="AudioStream" uid="uid://bawljxsspb8li" path="res://addins/sounds/roblox-minecraft-fortnite-video-game-music-358426.mp3" id="4_074og"]
@@ -84,6 +85,7 @@ autoplay = true
 parameters/looping = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("3_vivmo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
 offset_right = 40.0
@@ -163,6 +165,33 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 35.351
 
 [node name="wall78" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 38.2548, -1.1765, 18.2248)
+
+[node name="wall82" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.2793, -1.1765, 28.457829)
+
+[node name="wall83" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 14.2686, -1.1765, 28.46123)
+
+[node name="wall84" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 18.2571, -1.1765, 28.45053)
+
+[node name="wall92" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 19.8471, -1.1765, 28.44563)
+
+[node name="wall93" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 25.783974, -1.1765, 28.457829)
+
+[node name="wall94" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 29.773273, -1.1765, 28.46123)
+
+[node name="wall95" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 33.761772, -1.1765, 28.45053)
+
+[node name="wall96" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 35.351772, -1.1765, 28.44563)
+
+[node name="wall97" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 38.2548, -1.1765, 28.44563)
 
 [node name="wall25" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 25.783974, 2.5746865, 18.237)

@@ -207,7 +207,7 @@ func get_strategic_spawn_position() -> Vector3:
 	var spawn_attempts = 0
 	var max_attempts = 20
 	var min_distance = 8.0  # Reduced minimum distance between players
-	var spawn_radius = 12.0  # Reduced spawn radius to keep players on map
+	var spawn_radius = 4.0  # Reduced spawn radius to keep players on map
 	
 	while spawn_attempts < max_attempts:
 		# Generate random position in a larger area
