@@ -10,6 +10,7 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 var player_scene = preload("res://scenes/player.tscn")
 var players_in_lobby = {}
 var is_host = false
+var discovery_peers = []
 
 func _ready():
 	add_to_group("main")
@@ -48,6 +49,11 @@ func host_game(player_name: String):
 	# Add self to lobby
 	players_in_lobby[1] = {"name": player_name, "ready": false}
 	
+	# Show host IP for others to join
+	var host_ip = get_local_ip()
+	print("🌐 Host IP: ", host_ip)
+	print("📢 Tell others to join: ", host_ip)
+	
 	show_lobby()
 	update_lobby_display()
 
@@ -67,7 +73,63 @@ func _on_connected_to_server(player_name: String):
 
 func _on_connection_failed():
 	print("Connection failed!")
+	# Show error message
+	var start_menu_node = get_tree().get_first_node_in_group("start_menu")
+	if start_menu_node and start_menu_node.has_method("show_error"):
+		start_menu_node.show_error("Failed to connect to host!\nCheck IP address and try again.")
 	show_start_menu()
+
+# Simple LAN game discovery
+func discover_lan_games() -> Array:
+	var found_games = []
+	
+	# Get local IP range
+	var local_ips = get_local_ip_range()
+	
+	for ip in local_ips:
+		if can_connect_to_host(ip):
+			found_games.append({
+				"ip": ip,
+				"name": "Game at " + ip
+			})
+	
+	return found_games
+
+func get_local_ip_range() -> Array:
+	var ips = []
+	
+	# Common local IP ranges to scan
+	var base_ips = [
+		"192.168.1.",
+		"192.168.0.",
+		"10.0.0.",
+		"172.16.0."
+	]
+	
+	for base in base_ips:
+		for i in range(1, 255):  # Scan common range
+			ips.append(base + str(i))
+			if ips.size() > 20:  # Limit scan for performance
+				break
+	
+	# Always include localhost
+	ips.append("127.0.0.1")
+	
+	return ips
+
+func can_connect_to_host(ip: String) -> bool:
+	# Simple check - in a real implementation you'd do actual network discovery
+	# For now, just return true for localhost and some common IPs
+	return ip == "127.0.0.1" or ip == "192.168.1.100"
+
+func get_local_ip() -> String:
+	# Get the local IP address
+	var ip_addresses = IP.get_local_addresses()
+	for ip in ip_addresses:
+		# Return first non-localhost IP
+		if ip != "127.0.0.1" and ip.begins_with("192.168"):
+			return ip
+	return "127.0.0.1"  # Fallback to localhost
 
 func _on_peer_connected(id: int):
 	print("Peer connected: ", id)

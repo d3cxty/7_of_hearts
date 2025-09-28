@@ -79,6 +79,8 @@ layout_mode = 2
 text = "JOIN GAME
 "
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="StartMenu"]
+
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("3_vivmo")
 
@@ -145,6 +147,210 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 18.257
 
 [node name="wall13" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 19.8471, -1.1765, 18.2248)
+
+[node name="wall14" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 25.783974, -1.1765, 18.237)
+
+[node name="wall15" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 29.773273, -1.1765, 18.2404)
+
+[node name="wall18" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 33.761772, -1.1765, 18.2297)
+
+[node name="wall24" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 35.351772, -1.1765, 18.2248)
+
+[node name="wall78" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 38.2548, -1.1765, 18.2248)
+
+[node name="wall25" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 25.783974, 2.5746865, 18.237)
+
+[node name="wall26" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 29.773273, 2.5746865, 18.2404)
+
+[node name="wall27" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 33.761772, 2.5746865, 18.2297)
+
+[node name="wall28" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 35.351772, 2.5746865, 18.2248)
+
+[node name="wall77" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 38.249302, 2.5746865, 18.2248)
+
+[node name="wall81" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 25.783974, -1.1765, 8.797913)
+
+[node name="wall85" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 38.2548, -1.1765, 8.785713)
+
+[node name="wall86" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 25.783974, 2.5746865, 8.797913)
+
+[node name="wall87" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 29.773273, 2.5746865, 8.801313)
+
+[node name="wall88" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 33.761772, 2.5746865, 8.790613)
+
+[node name="wall89" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 35.351772, 2.5746865, 8.785713)
+
+[node name="wall91" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 34.225063, -1.2255225, 8.785713)
+
+[node name="wall90" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 38.249302, 2.5746865, 8.785713)
+
+[node name="wall29" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 19.346571, -1.1765, -35.32544)
+
+[node name="wall30" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 23.33587, -1.1765, -35.322037)
+
+[node name="wall31" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 27.32437, -1.1765, -35.33274)
+
+[node name="wall32" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 28.91437, -1.1765, -35.33764)
+
+[node name="wall33" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 19.346571, 2.5746865, -35.32544)
+
+[node name="wall34" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 23.33587, 2.5746865, -35.322037)
+
+[node name="wall35" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 27.32437, 2.5746865, -35.33274)
+
+[node name="wall36" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 28.91437, 2.5746865, -35.33764)
+
+[node name="wall37" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 28.387524, -1.1765, -35.32544)
+
+[node name="wall38" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 32.376823, -1.1765, -35.322037)
+
+[node name="wall39" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 36.365322, -1.1765, -35.33274)
+
+[node name="wall40" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 37.955322, -1.1765, -35.33764)
+
+[node name="wall41" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 28.387524, 2.5746865, -35.32544)
+
+[node name="wall42" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 32.376823, 2.5746865, -35.322037)
+
+[node name="wall43" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 36.365322, 2.5746865, -35.33274)
+
+[node name="wall44" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 37.955322, 2.5746865, -35.33764)
+
+[node name="wall45" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.89655, -1.1764998, -24.779097)
+
+[node name="wall46" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.894524, -1.1764998, -28.768396)
+
+[node name="wall47" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.878387, -1.1764998, -32.756874)
+
+[node name="wall48" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.871326, -1.1764998, -34.34687)
+
+[node name="wall49" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.89655, 2.5746865, -24.779097)
+
+[node name="wall50" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.894524, 2.5746865, -28.768396)
+
+[node name="wall51" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.878387, 2.5746865, -32.756874)
+
+[node name="wall52" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.871326, 2.5746865, -34.34687)
+
+[node name="wall53" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.89655, -1.1764998, -11.282625)
+
+[node name="wall54" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.894524, -1.1764998, -15.271925)
+
+[node name="wall55" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.878387, -1.1764998, -19.260403)
+
+[node name="wall56" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.871326, -1.1764998, -20.850399)
+
+[node name="wall57" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.89655, 2.5746865, -11.282625)
+
+[node name="wall58" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.894524, 2.5746865, -15.271925)
+
+[node name="wall59" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.878387, 2.5746865, -19.260403)
+
+[node name="wall60" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.871326, 2.5746865, -20.850399)
+
+[node name="wall61" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.89655, -1.1764998, 0.21501732)
+
+[node name="wall62" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.894524, -1.1764998, -3.7742825)
+
+[node name="wall63" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.878387, -1.1764998, -7.76276)
+
+[node name="wall64" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.871326, -1.1764998, -9.3527565)
+
+[node name="wall65" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.89655, 2.5746865, 0.21501732)
+
+[node name="wall66" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.894524, 2.5746865, -3.7742825)
+
+[node name="wall67" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.878387, 2.5746865, -7.76276)
+
+[node name="wall68" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.871326, 2.5746865, -9.3527565)
+
+[node name="wall69" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.89655, -1.1764998, 13.629809)
+
+[node name="wall80" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.89655, -1.1764998, 16.029745)
+
+[node name="wall70" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.894524, -1.1764998, 9.64051)
+
+[node name="wall71" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.878387, -1.1764998, 5.652032)
+
+[node name="wall72" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.871326, -1.1764998, 4.0620356)
+
+[node name="wall73" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.89655, 2.5746865, 13.629809)
+
+[node name="wall79" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.89655, 2.5746865, 15.897893)
+
+[node name="wall74" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.894524, 2.5746865, 9.64051)
+
+[node name="wall75" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.878387, 2.5746865, 5.652032)
+
+[node name="wall76" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.001361326, 0, -0.99999905, 0, 1, 0, 0.99999905, 0, 0.001361326, 39.871326, 2.5746865, 4.0620356)
 
 [node name="wall16" parent="GameWorld/WALLS/1_floor_walls" instance=ExtResource("3_h2yge")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 18.2571, -1.1765, -12.5208)
@@ -329,6 +535,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.192677, -1.0966423, 2.6263
 
 [node name="wall26" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.701595, -1.0966423, 2.62638)
+
+[node name="wall37" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.031322, -1.0966423, -2.3763347)
+
+[node name="wall38" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.399097, -1.0966423, -2.3763347)
+
+[node name="wall39" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.908016, -1.0966423, -2.3763347)
+
+[node name="wall40" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.031322, -1.0966423, -21.905916)
+
+[node name="wall41" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.399097, -1.0966423, -21.905916)
+
+[node name="wall42" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.908016, -1.0966423, -21.905916)
 
 [node name="wall28" parent="GameWorld/WALLS/2_fllor_walls" instance=ExtResource("3_h2yge")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14.099943, -1.0966423, 5.603778)
@@ -2557,6 +2781,21 @@ transform = Transform3D(0.9383543, 0.22695161, -0.2607377, 0.10791476, 0.5242582
 
 [node name="torch mount" parent="GameWorld/torches" instance=ExtResource("12_dg77c")]
 transform = Transform3D(-0.9383545, 0.10791476, -0.32839864, -0.22695166, 0.5242582, 0.82075965, 0.2607377, 0.8446939, -0.4674486, 0.007048607, -0.8456726, 0.22048092)
+
+[node name="torch mount3" parent="GameWorld/torches" instance=ExtResource("12_dg77c")]
+transform = Transform3D(-0.7314972, 0.10791475, -0.6732514, -0.53351974, 0.52425843, 0.66370976, 0.4245814, 0.844694, -0.32591903, 28.232815, 6.179681, -7.7793593)
+
+[node name="torch mount7" parent="GameWorld/torches" instance=ExtResource("12_dg77c")]
+transform = Transform3D(-0.74264467, 0.17127815, -0.64741313, -0.56842357, 0.3499261, 0.7446119, 0.35408223, 0.9209863, -0.16251233, 24.166302, 16.343033, -13.567707)
+
+[node name="torch mount8" parent="GameWorld/torches" instance=ExtResource("12_dg77c")]
+transform = Transform3D(-0.74264467, 0.17127815, -0.64741313, -0.56842357, 0.34992617, 0.7446119, 0.35408223, 0.92098635, -0.16251239, 19.094933, 29.017803, -20.786388)
+
+[node name="torch mount9" parent="GameWorld/torches" instance=ExtResource("12_dg77c")]
+transform = Transform3D(-0.74264467, 0.17127815, -0.64741313, -0.56842357, 0.34992617, 0.74461186, 0.35408223, 0.92098635, -0.16251242, 13.038704, 44.154007, -29.406933)
+
+[node name="torch mount10" parent="GameWorld/torches" instance=ExtResource("12_dg77c")]
+transform = Transform3D(-0.5581237, -0.0891559, 0.8249546, 0.6948412, 0.4932044, 0.52339804, -0.45353532, 0.8653329, -0.21332023, -5.58251, 39.82219, -23.930824)
 
 [node name="torch mount2" parent="GameWorld/torches" instance=ExtResource("12_dg77c")]
 transform = Transform3D(-0.9383545, 0.107914746, -0.32839864, -0.22695167, 0.5242582, 0.82075965, 0.26073763, 0.8446939, -0.4674486, 12.028057, 2.3030381, -3.3071012)

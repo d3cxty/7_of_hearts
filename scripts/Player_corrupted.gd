@@ -2,16 +2,31 @@ extends CharacterBody3D
 
 signal role_updated(role: String, player_name: String)
 
-# Export variables for tweaking in editor
 @export var role: String = "Sheep"
 @export var speed: float = 3.0  # Adjusted to match walk animation pace
+@export var sprint_speed: float = 5.0  # Adjusted to match run animation pace
+
+@export var role: String = "Sheep"
+@export var speed: float = 3.0  # Adjusted to matc		# Scale animation speed to match movement speed (prevents sliding feet)
+		if anim_tree:
+			var anim_speed_scale = 1.0
+			if new_anim_state == "walk" and speed_magnitude > 0.1:
+				# Scale walk animation: faster movement = faster animation
+				anim_speed_scale = clamp(speed_magnitude / speed, 0.5, 2.0)
+			elif new_anim_state == "run" and speed_magnitude > 0.1:
+				# Scale run animation: match sprint speed
+				anim_speed_scale = clamp(speed_magnitude / sprint_speed, 0.8, 2.0)
+			
+			# Apply time scale to the entire AnimationTree for speed matching
+			anim_tree.set("parameters/TimeScale/scale", anim_speed_scale)
+			
+			print("Speed: ", speed_magnitude, " | Anim scale: ", anim_speed_scale, " | State: ", new_anim_state) pace
 @export var sprint_speed: float = 5.0  # Adjusted to match run animation pace
 @export var wolf_speed_multiplier: float = 1.25  # 25% speed boost for wolf
 @export var jump_force: float = 5.0
 @export var mouse_sens: float = 0.12
 @export var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-# Player state variables
 var player_name: String = "Player"
 var yaw: float = 0.0
 var pitch: float = 0.0
@@ -19,17 +34,16 @@ var current_anim_state: String = "idle"
 var role_swap_cooldown: float = 0.0
 var role_swap_cooldown_time: float = 2.0  # 2 second cooldown between swaps
 
-# Node references
 @onready var label_3d: Label3D = $Label3D
 @onready var cam: Camera3D = $Camera3D
 @onready var collision: CollisionShape3D = $CollisionShape3D
 @onready var anim_tree: AnimationTree = $AnimationTree
-@onready var contact_area: Area3D = $ContactArea
+@onready var contact_area: Area3D = $ContactArea  # Add this to your player scene
 
 func _ready():
 	print("Player ready - ID: ", get_multiplayer_authority())
 	
-	# Setup animations with debugging
+	# Setup animations with detailed debugging
 	if anim_tree:
 		print("AnimationTree found!")
 		anim_tree.active = true
@@ -53,8 +67,9 @@ func _ready():
 		label_3d.text = "[%s] %s" % [role, player_name]
 		label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	
-	# Setup contact detection for all players
+	# Setup contact detection for all players (not just authority)
 	if contact_area:
+		# Connect to area_entered instead of body_entered since we're detecting other ContactAreas
 		contact_area.area_entered.connect(_on_contact_area_entered)
 		print("Contact area connected for player: ", player_name)
 	
@@ -93,10 +108,10 @@ func _physics_process(delta):
 	if role_swap_cooldown > 0:
 		role_swap_cooldown -= delta
 		# Visual indicator during cooldown
-		if label_3d:
+		if label_3d and is_multiplayer_authority():
 			label_3d.modulate = Color.GRAY.lerp(Color.WHITE, 1.0 - (role_swap_cooldown / role_swap_cooldown_time))
 	else:
-		if label_3d:
+		if label_3d and is_multiplayer_authority():
 			label_3d.modulate = Color.WHITE
 	
 	# Handle gravity
@@ -107,9 +122,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_force
 	
-	# Handle movement with smooth physics
+	# Handle movement - Fixed ALL direction mappings
 	var input_dir = Input.get_vector("move_left", "move_right", "move_back", "move_front")
-	
 	# Use camera-relative movement for first-person feel
 	var forward = -cam.global_transform.basis.z if cam else -global_transform.basis.z
 	var right = cam.global_transform.basis.x if cam else global_transform.basis.x
@@ -126,7 +140,6 @@ func _physics_process(delta):
 	if role == "Wolf":
 		current_speed *= wolf_speed_multiplier
 	
-	# Smooth movement physics - YOUR SOLUTION IMPLEMENTED
 	if direction:
 		# Smooth acceleration to target velocity
 		var target_velocity_x = direction.x * current_speed
@@ -161,28 +174,29 @@ func _physics_process(delta):
 		# Animation based on both input AND actual velocity for accuracy
 		if is_on_ground:
 			if has_input and speed_magnitude > 0.5:  # Moving threshold
-				if is_running_input and speed_magnitude > 4.0:  # Running speed threshold
+				if is_running_input and speed_magnitude > 4.5:  # Running speed threshold
 					new_anim_state = "run"
 				elif speed_magnitude > 1.0:  # Walking speed threshold
 					new_anim_state = "walk"
 			elif speed_magnitude < 0.3:  # Nearly stopped
 				new_anim_state = "idle"
 		
-		# Animation speed scaling to match movement speed (prevents foot sliding)
+		# Scale animation speed to match movement speed (prevents sliding feet)
 		if anim_tree:
 			var anim_speed_scale = 1.0
-			if new_anim_state == "walk" and speed_magnitude > 0.1:
-				# Scale walk animation: faster movement = faster animation
-				anim_speed_scale = clamp(speed_magnitude / speed, 0.5, 2.0)
-			elif new_anim_state == "run" and speed_magnitude > 0.1:
-				# Scale run animation: match sprint speed
-				anim_speed_scale = clamp(speed_magnitude / sprint_speed, 0.8, 2.0)
+			if new_anim_state == "walk":
+				# Scale walk animation based on actual walk speed vs base speed
+				anim_speed_scale = speed_magnitude / speed
+			elif new_anim_state == "run":
+				# Scale run animation based on actual run speed vs base sprint speed  
+				anim_speed_scale = speed_magnitude / sprint_speed
 			
-			# Apply time scale for speed matching (if TimeScale node exists)
-			if anim_tree.has_method("set"):
-				anim_tree.set("parameters/TimeScale/scale", anim_speed_scale)
+			# Apply the speed scaling to prevent foot sliding
+			anim_tree.set("parameters/playback", anim_tree.get("parameters/playback"))
+			if anim_tree.has_method("set_speed_scale"):
+				anim_tree.set_speed_scale(anim_speed_scale)
 			
-			print("Speed: ", speed_magnitude, " | Anim scale: ", anim_speed_scale, " | State: ", new_anim_state)
+			print("Animation speed scale: ", anim_speed_scale, " for state: ", new_anim_state)
 		
 		set_animation_state(new_anim_state)
 		rpc("sync_animation", new_anim_state)
@@ -190,10 +204,10 @@ func _physics_process(delta):
 	# Sync position to other players
 	rpc("sync_position", position, velocity)
 
-# Enhanced network prediction for smoother multiplayer movement
 @rpc("any_peer", "call_local", "unreliable")
 func sync_position(pos: Vector3, vel: Vector3):
 	if not is_multiplayer_authority():
+		# Enhanced network prediction for smoother movement
 		var distance = position.distance_to(pos)
 		
 		if distance > 5.0:  # Teleport if too far (network glitch)
@@ -300,11 +314,7 @@ func update_role(new_role: String):
 func set_animation_state(state: String):
 	if anim_tree and state != current_anim_state:
 		current_anim_state = state
-		# Try both simple StateMachine and BlendTree approaches
-		var state_machine = anim_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
-		if not state_machine:
-			state_machine = anim_tree.get("parameters/StateMachine/playbook") as AnimationNodeStateMachinePlayback
-		
+		var state_machine = anim_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
 		if state_machine:
 			var target_state = ""
 			if state == "idle":

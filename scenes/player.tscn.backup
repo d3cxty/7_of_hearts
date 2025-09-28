@@ -1,4 +1,41 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8qvfwh3wep02"]
+[gd_scene load_ste[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_idle_to_walk"]
+advance_mode = 2
+advance_condition = &"is_moving"
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_walk_to_idle"]
+advance_mode = 2
+advance_condition = &"is_idle"
+xfade_time = 0.15
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_walk_to_run"]
+advance_mode = 2
+advance_condition = &"is_running"
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_run_to_walk"]
+advance_mode = 2
+advance_condition = &"is_moving"
+xfade_time = 0.15
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_run_to_idle"]
+advance_mode = 2
+advance_condition = &"is_idle"
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_start_to_idle"]
+advance_mode = 0
+xfade_time = 0.0
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_igl26"]
+states/CharacterArmature|Idle_Neutral/node = SubResource("AnimationNodeAnimation_g2els")
+states/CharacterArmature|Idle_Neutral/position = Vector2(352, 139)
+states/CharacterArmature|Run/node = SubResource("AnimationNodeAnimation_qhqgy")
+states/CharacterArmature|Run/position = Vector2(641, 131)
+states/CharacterArmature|Walk/node = SubResource("AnimationNodeAnimation_dqkch")
+states/CharacterArmature|Walk/position = Vector2(397, 50)
+states/Start/position = Vector2(179, 127)
+transitions = ["Start", "CharacterArmature|Idle_Neutral", SubResource("AnimationNodeStateMachineTransition_start_to_idle"), "CharacterArmature|Idle_Neutral", "CharacterArmature|Walk", SubResource("AnimationNodeStateMachineTransition_idle_to_walk"), "CharacterArmature|Walk", "CharacterArmature|Idle_Neutral", SubResource("AnimationNodeStateMachineTransition_walk_to_idle"), "CharacterArmature|Walk", "CharacterArmature|Run", SubResource("AnimationNodeStateMachineTransition_walk_to_run"), "CharacterArmature|Run", "CharacterArmature|Walk", SubResource("AnimationNodeStateMachineTransition_run_to_walk"), "CharacterArmature|Run", "CharacterArmature|Idle_Neutral", SubResource("AnimationNodeStateMachineTransition_run_to_idle")]mat=3 uid="uid://c8qvfwh3wep02"]
 
 [ext_resource type="Script" uid="uid://bgu7soejdto4f" path="res://scripts/Player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://d2wokjbvs2f33" path="res://addins/charachter/Hoodie Character.glb" id="2_qhqgy"]
@@ -15,8 +52,6 @@ animation = &"CharacterArmature|Run"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dqkch"]
 animation = &"CharacterArmature|Walk"
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_main"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_igl26"]
 states/CharacterArmature|Idle_Neutral/node = SubResource("AnimationNodeAnimation_g2els")
