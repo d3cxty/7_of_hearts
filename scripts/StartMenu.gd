@@ -6,6 +6,8 @@ extends CanvasLayer
 
 func _ready():
 	add_to_group("start_menu")
+	setup_hide_and_seek_theme()
+	
 	print("=== StartMenu Debug ===")
 	print("name_input exists: ", name_input != null)
 	print("new_game_button exists: ", new_game_button != null)
@@ -26,6 +28,86 @@ func _ready():
 		
 	if name_input and name_input.text == "":
 		name_input.text = "Player" + str(randi() % 100)
+
+func setup_hide_and_seek_theme():
+	# Apply HIDE AND SEEK horror theme styling
+	var dark_bg = Color(0.08, 0.05, 0.03, 0.95)  # Dark brown/black
+	var rust_orange = Color(0.8, 0.4, 0.1, 1.0)  # Rusty orange
+	var blood_red = Color(0.6, 0.1, 0.1, 1.0)    # Dark red
+	var worn_text = Color(0.9, 0.8, 0.6, 1.0)    # Aged paper color
+	
+	# Style buttons with horror theme
+	if new_game_button:
+		style_horror_button(new_game_button, "🎯 START HUNT", rust_orange)
+		
+	if join_game_button:
+		style_horror_button(join_game_button, "👥 JOIN HUNT", blood_red)
+	
+	# Style name input
+	if name_input:
+		name_input.placeholder_text = "Enter Hunter Name..."
+		var input_style = StyleBoxFlat.new()
+		input_style.bg_color = Color(0.15, 0.1, 0.05, 0.8)
+		input_style.border_width_left = 2
+		input_style.border_width_right = 2
+		input_style.border_width_top = 2
+		input_style.border_width_bottom = 2
+		input_style.border_color = rust_orange
+		input_style.corner_radius_top_left = 8
+		input_style.corner_radius_top_right = 8
+		input_style.corner_radius_bottom_left = 8
+		input_style.corner_radius_bottom_right = 8
+		name_input.add_theme_stylebox_override("normal", input_style)
+		name_input.add_theme_color_override("font_color", worn_text)
+
+func style_horror_button(button: Button, text: String, accent_color: Color):
+	button.text = text
+	
+	# Normal state - dark with accent border
+	var normal_style = StyleBoxFlat.new()
+	normal_style.bg_color = Color(0.1, 0.08, 0.05, 0.9)
+	normal_style.border_width_left = 3
+	normal_style.border_width_right = 3
+	normal_style.border_width_top = 3
+	normal_style.border_width_bottom = 3
+	normal_style.border_color = accent_color
+	normal_style.corner_radius_top_left = 12
+	normal_style.corner_radius_top_right = 12
+	normal_style.corner_radius_bottom_left = 12
+	normal_style.corner_radius_bottom_right = 12
+	
+	# Hover state - lighter with glow effect
+	var hover_style = StyleBoxFlat.new()
+	hover_style.bg_color = accent_color * 0.3
+	hover_style.border_width_left = 4
+	hover_style.border_width_right = 4
+	hover_style.border_width_top = 4
+	hover_style.border_width_bottom = 4
+	hover_style.border_color = accent_color
+	hover_style.corner_radius_top_left = 12
+	hover_style.corner_radius_top_right = 12
+	hover_style.corner_radius_bottom_left = 12
+	hover_style.corner_radius_bottom_right = 12
+	
+	# Pressed state - darker with inset effect
+	var pressed_style = StyleBoxFlat.new()
+	pressed_style.bg_color = accent_color * 0.6
+	pressed_style.border_width_left = 2
+	pressed_style.border_width_right = 2
+	pressed_style.border_width_top = 2
+	pressed_style.border_width_bottom = 2
+	pressed_style.border_color = accent_color
+	pressed_style.corner_radius_top_left = 12
+	pressed_style.corner_radius_top_right = 12
+	pressed_style.corner_radius_bottom_left = 12
+	pressed_style.corner_radius_bottom_right = 12
+	
+	button.add_theme_stylebox_override("normal", normal_style)
+	button.add_theme_stylebox_override("hover", hover_style)
+	button.add_theme_stylebox_override("pressed", pressed_style)
+	button.add_theme_color_override("font_color", Color(0.9, 0.8, 0.6, 1.0))
+	button.add_theme_color_override("font_hover_color", Color(1.0, 0.9, 0.7, 1.0))
+	button.add_theme_color_override("font_pressed_color", Color(1.0, 1.0, 1.0, 1.0))
 
 func _on_new_game_pressed():
 	print("NEW GAME button pressed!")

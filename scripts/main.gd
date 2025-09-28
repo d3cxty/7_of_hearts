@@ -161,16 +161,16 @@ func start_game_from_lobby():
 	print("Starting game from lobby!")
 	show_game()
 	
-	# Spawn all players
-	var wolf_assigned = false
+	# Spawn all players with horror theme roles
+	var hunter_assigned = false
 	for id in players_in_lobby.keys():
 		var player_name = players_in_lobby[id]["name"]
-		var role = "Sheep"
+		var role = "Prey"  # Changed from "Sheep" to fit horror theme
 		
-		# First player becomes Wolf
-		if not wolf_assigned:
-			role = "Wolf"
-			wolf_assigned = true
+		# First player becomes Hunter
+		if not hunter_assigned:
+			role = "Hunter"  # Changed from "Wolf" to fit hide-and-seek theme
+			hunter_assigned = true
 		
 		spawn_player(id, player_name, role)
 	
@@ -194,11 +194,50 @@ func spawn_player(id: int, player_name: String, role: String):
 	player_instance.role = role
 	player_instance.add_to_group("players")
 	
-	# Random spawn position
-	player_instance.position = Vector3(randf_range(-3, 3), 1, randf_range(-3, 3))
+	# Strategic spawn positioning - spread players far apart
+	var spawn_position = get_strategic_spawn_position()
+	player_instance.position = spawn_position
 	
 	players_container.add_child(player_instance)
-	print("Spawned: ", player_name, " as ", role)
+	print("Spawned: ", player_name, " as ", role, " at position: ", spawn_position)
+
+func get_strategic_spawn_position() -> Vector3:
+	# Get all existing players to avoid spawning too close
+	var existing_players = get_tree().get_nodes_in_group("players")
+	var spawn_attempts = 0
+	var max_attempts = 20
+	var min_distance = 15.0  # Minimum distance between players
+	var spawn_radius = 25.0  # Maximum spawn radius
+	
+	while spawn_attempts < max_attempts:
+		# Generate random position in a larger area
+		var candidate_pos = Vector3(
+			randf_range(-spawn_radius, spawn_radius),
+			2.0,  # Slightly higher spawn height
+			randf_range(-spawn_radius, spawn_radius)
+		)
+		
+		# Check if position is far enough from existing players
+		var too_close = false
+		for player in existing_players:
+			if player.position.distance_to(candidate_pos) < min_distance:
+				too_close = true
+				break
+		
+		if not too_close:
+			return candidate_pos
+		
+		spawn_attempts += 1
+	
+	# Fallback: if can't find good position, use corner spawn
+	var corners = [
+		Vector3(-spawn_radius * 0.8, 2.0, -spawn_radius * 0.8),
+		Vector3(spawn_radius * 0.8, 2.0, -spawn_radius * 0.8),
+		Vector3(-spawn_radius * 0.8, 2.0, spawn_radius * 0.8),
+		Vector3(spawn_radius * 0.8, 2.0, spawn_radius * 0.8)
+	]
+	
+	return corners[existing_players.size() % corners.size()]
 
 func toggle_ready():
 	var my_id = multiplayer.get_unique_id()

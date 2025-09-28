@@ -1,5 +1,41 @@
 # Godot 4+ specific ignores
 .godot/
-.addins/
-.addons/
-/android/
+.import/
+
+# Build outputs (keep builds/ folder structure but ignore contents)
+builds/*
+!builds/.gitkeep
+
+# Export templates - keep for teammates to have same export settings
+# export_presets.cfg
+
+# Personal IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Personal scripts (keep run_game.sh for teammates)
+# build.sh can be kept as it might be useful
+
+# Godot-specific
+# Keep .import files - needed for teammates
+# Keep .uid files - needed for proper references
+
+# Personal settings that shouldn't be shared
+# (Currently none identified)
