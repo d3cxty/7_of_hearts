@@ -161,16 +161,16 @@ func start_game_from_lobby():
 	print("Starting game from lobby!")
 	show_game()
 	
-	# Spawn all players with horror theme roles
-	var hunter_assigned = false
+	# Spawn all players with sheep and wolf roles
+	var wolf_assigned = false
 	for id in players_in_lobby.keys():
 		var player_name = players_in_lobby[id]["name"]
-		var role = "Prey"  # Changed from "Sheep" to fit horror theme
+		var role = "Sheep"  # Default role
 		
-		# First player becomes Hunter
-		if not hunter_assigned:
-			role = "Hunter"  # Changed from "Wolf" to fit hide-and-seek theme
-			hunter_assigned = true
+		# First player becomes Wolf
+		if not wolf_assigned:
+			role = "Wolf"  # The hunter role
+			wolf_assigned = true
 		
 		spawn_player(id, player_name, role)
 	

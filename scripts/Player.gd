@@ -3,7 +3,7 @@ extends CharacterBody3D
 signal role_updated(role: String, player_name: String)
 
 # Export variables for tweaking in editor
-@export var role: String = "Prey"  # Changed from "Sheep" for horror theme
+@export var role: String = "Sheep"  # Default role
 @export var speed: float = 3.0  # Adjusted to match walk animation pace
 @export var sprint_speed: float = 5.0  # Adjusted to match run animation pace
 @export var wolf_speed_multiplier: float = 1.25  # 25% speed boost for wolf
@@ -122,8 +122,8 @@ func _physics_process(delta):
 	
 	var current_speed = sprint_speed if Input.is_action_pressed("sprint") else speed
 	
-	# Apply hunter speed advantage
-	if role == "Hunter":  # Changed from "Wolf" 
+	# Apply wolf speed advantage
+	if role == "Wolf": 
 		current_speed *= wolf_speed_multiplier
 	
 	# Smooth movement physics - YOUR SOLUTION IMPLEMENTED
@@ -280,7 +280,7 @@ func show_role_swap_effect():
 	if label_3d:
 		var original_modulate = label_3d.modulate
 		# Flash with horror-themed role colors
-		var flash_color = Color(0.7, 0.15, 0.1, 1.0) if role == "Hunter" else Color(0.3, 0.5, 0.7, 1.0)  # Blood red for Hunter, muted blue for Prey
+		var flash_color = Color(0.7, 0.15, 0.1, 1.0) if role == "Wolf" else Color(0.3, 0.5, 0.7, 1.0)  # Red for Wolf, blue for Sheep
 		label_3d.modulate = flash_color
 		
 		# Scale effect
@@ -295,6 +295,7 @@ func update_role(new_role: String):
 	role = new_role
 	if label_3d:
 		label_3d.text = "[%s] %s" % [role, player_name]
+	print("Player ", player_name, " role updated to: ", role)
 	emit_signal("role_updated", role, player_name)
 
 func set_animation_state(state: String):
