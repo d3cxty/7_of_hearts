@@ -38,14 +38,14 @@ func setup_hide_and_seek_theme():
 	
 	# Style buttons with horror theme
 	if new_game_button:
-		style_horror_button(new_game_button, "🎯 START HUNT", rust_orange)
+		style_horror_button(new_game_button, "START GAME", rust_orange)
 		
 	if join_game_button:
-		style_horror_button(join_game_button, "👥 JOIN HUNT", blood_red)
+		style_horror_button(join_game_button, "JOIN GAME", blood_red)
 	
 	# Style name input
 	if name_input:
-		name_input.placeholder_text = "Enter Hunter Name..."
+		name_input.placeholder_text = "Enter Player Name..."
 		var input_style = StyleBoxFlat.new()
 		input_style.bg_color = Color(0.15, 0.1, 0.05, 0.8)
 		input_style.border_width_left = 2

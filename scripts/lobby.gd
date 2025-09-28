@@ -21,9 +21,9 @@ func _ready():
 	if main and not main.is_host:
 		start_button.visible = false
 	elif main and main.is_host:
-		# Show host IP for others to join with horror theme
+		# Show host IP for others to join
 		var host_ip = main.get_local_ip()
-		status_label.text = "🔥 HUNTING GROUNDS: " + host_ip + " | Share IP with other hunters!"
+		status_label.text = "Your IP: " + host_ip + " | Share with other players!"
 
 func setup_horror_lobby_theme():
 	# Horror color palette
@@ -34,15 +34,15 @@ func setup_horror_lobby_theme():
 	
 	# Style the ready button
 	if ready_button:
-		style_horror_button(ready_button, "⚔️ READY TO HUNT", rust_orange)
+		style_horror_button(ready_button, "READY", rust_orange)
 	
 	# Style the start button 
 	if start_button:
-		style_horror_button(start_button, "🔥 BEGIN THE HUNT", blood_red)
+		style_horror_button(start_button, "START GAME", blood_red)
 		
 	# Style the back button
 	if back_button:
-		style_horror_button(back_button, "🚪 ESCAPE", Color(0.4, 0.4, 0.4, 1.0))
+		style_horror_button(back_button, "BACK", Color(0.4, 0.4, 0.4, 1.0))
 	
 	# Style status label
 	if status_label:
@@ -103,7 +103,7 @@ func style_horror_button(button: Button, text: String, accent_color: Color):
 
 func _on_ready_pressed():
 	is_ready = not is_ready
-	ready_button.text = "💀 NOT READY" if is_ready else "⚔️ READY TO HUNT"
+	ready_button.text = "NOT READY" if is_ready else "READY"
 	
 	var main = get_tree().get_first_node_in_group("main")
 	if main:
@@ -136,8 +136,8 @@ func update_player_list(players_data = null):
 		for player_id in players_to_show:
 			var player_info = players_to_show[player_id]
 			var label = Label.new()
-			var ready_text = " 🔥" if player_info.ready else " 💀"
-			label.text = "👤 " + player_info.name + ready_text
+			var ready_text = " ✓" if player_info.ready else " ✗"
+			label.text = player_info.name + ready_text
 			
 			# Style the player label with horror theme
 			label.add_theme_font_size_override("font_size", 16)

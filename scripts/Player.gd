@@ -17,13 +17,7 @@ var yaw: float = 0.0
 var pitch: float = 0.0
 var current_anim_state: String = "idle"
 var role_swap_cooldown: float = 0.0
-var role_swap_cooldown_time: float = 2.0  # 2 second cooldown between swaps
-
-# Radar system variables
-var radar_timer: float = 0.0
-var radar_interval: float = 30.0  # Ping every 30 seconds
-var radar_ping_duration: float = 3.0  # How long the ping lasts
-var radar_active: bool = false
+var role_swap_cooldown_time: float = 5.0  # 5 second delay after swap
 
 # Node references
 @onready var label_3d: Label3D = $Label3D
@@ -105,19 +99,6 @@ func _physics_process(delta):
 		if label_3d:
 			label_3d.modulate = Color.WHITE
 	
-	# Radar system - ping players every 30 seconds
-	radar_timer += delta
-	if radar_timer >= radar_interval:
-		radar_timer = 0.0
-		trigger_radar_ping()
-	
-	# Handle radar ping visual effect
-	if radar_active:
-		radar_ping_duration -= delta
-		if radar_ping_duration <= 0:
-			radar_active = false
-			hide_radar_ping()
-	
 	# Handle gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -125,12 +106,6 @@ func _physics_process(delta):
 	# Handle jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_force
-	
-	# Manual radar trigger (hold R for emergency ping)
-	if Input.is_action_just_pressed("ui_cancel"):  # ESC key for emergency radar
-		if radar_timer >= 10.0:  # Can only use emergency radar if normal radar timer is at least 10s
-			trigger_emergency_radar()
-			radar_timer = max(radar_timer - 10.0, 0.0)  # Reduces next radar by 10 seconds
 	
 	# Handle movement with smooth physics
 	var input_dir = Input.get_vector("move_left", "move_right", "move_back", "move_front")
@@ -344,90 +319,7 @@ func set_animation_state(state: String):
 				state_machine.travel(target_state)
 				print("Traveling to state: ", target_state)
 
-func trigger_radar_ping():
-	# Only ping if there are other players
-	var all_players = get_tree().get_nodes_in_group("players")
-	if all_players.size() <= 1:
-		return
-	
-	# Send radar ping to all players
-	rpc("show_radar_ping", player_name, position)
-	
-	# Show announcement
-	var hud = get_tree().get_first_node_in_group("hud")
-	if hud and hud.has_method("show_global_announcement"):
-		hud.show_global_announcement("📡 RADAR PING! All player positions revealed for 3 seconds!")
 
-func trigger_emergency_radar():
-	# Emergency radar with shorter duration
-	var all_players = get_tree().get_nodes_in_group("players")
-	if all_players.size() <= 1:
-		return
-	
-	# Send emergency ping
-	rpc("show_emergency_radar_ping", player_name, position)
-	
-	# Show announcement
-	var hud = get_tree().get_first_node_in_group("hud")
-	if hud and hud.has_method("show_global_announcement"):
-		hud.show_global_announcement("🚨 EMERGENCY RADAR! " + player_name + " used emergency ping! (2s duration)")
-
-@rpc("any_peer", "call_local", "reliable")
-func show_radar_ping(pinging_player: String, ping_position: Vector3):
-	radar_active = true
-	radar_ping_duration = 3.0  # Reset duration
-	
-	# Enhanced visual effect for radar ping
-	if label_3d:
-		# Create pulsing radar effect
-		var original_scale = label_3d.scale
-		var tween = create_tween()
-		tween.set_loops(6)  # Pulse 6 times over 3 seconds
-		tween.tween_property(label_3d, "scale", original_scale * 1.8, 0.25)
-		tween.tween_property(label_3d, "scale", original_scale, 0.25)
-		
-		# Radar color effect - bright green for visibility
-		var original_modulate = label_3d.modulate
-		label_3d.modulate = Color(0.2, 1.0, 0.2, 1.0)  # Bright radar green
-		
-		# Fade back to normal
-		var color_tween = create_tween()
-		color_tween.tween_interval(3.0)
-		color_tween.tween_property(label_3d, "modulate", original_modulate, 0.5)
-
-@rpc("any_peer", "call_local", "reliable")
-func show_emergency_radar_ping(pinging_player: String, ping_position: Vector3):
-	radar_active = true
-	radar_ping_duration = 2.0  # Shorter duration for emergency
-	
-	# More intense visual effect for emergency radar
-	if label_3d:
-		# Faster, more intense pulsing
-		var original_scale = label_3d.scale
-		var tween = create_tween()
-		tween.set_loops(8)  # More pulses, faster
-		tween.tween_property(label_3d, "scale", original_scale * 2.2, 0.125)
-		tween.tween_property(label_3d, "scale", original_scale, 0.125)
-		
-		# Emergency red color
-		var original_modulate = label_3d.modulate
-		label_3d.modulate = Color(1.0, 0.2, 0.2, 1.0)  # Bright emergency red
-		
-		# Fade back to normal
-		var color_tween = create_tween()
-		color_tween.tween_interval(2.0)
-		color_tween.tween_property(label_3d, "modulate", original_modulate, 0.5)
-
-func hide_radar_ping():
-	# Reset any remaining visual effects
-	if label_3d:
-		var original_scale = Vector3.ONE
-		var original_modulate = Color.WHITE
-		label_3d.scale = original_scale
-		label_3d.modulate = original_modulate
-
-func get_radar_time_remaining() -> float:
-	return radar_interval - radar_timer
 
 func get_role() -> String:
 	return role
