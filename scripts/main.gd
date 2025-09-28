@@ -206,8 +206,8 @@ func get_strategic_spawn_position() -> Vector3:
 	var existing_players = get_tree().get_nodes_in_group("players")
 	var spawn_attempts = 0
 	var max_attempts = 20
-	var min_distance = 15.0  # Minimum distance between players
-	var spawn_radius = 25.0  # Maximum spawn radius
+	var min_distance = 8.0  # Reduced minimum distance between players
+	var spawn_radius = 12.0  # Reduced spawn radius to keep players on map
 	
 	while spawn_attempts < max_attempts:
 		# Generate random position in a larger area
@@ -229,15 +229,17 @@ func get_strategic_spawn_position() -> Vector3:
 		
 		spawn_attempts += 1
 	
-	# Fallback: if can't find good position, use corner spawn
-	var corners = [
-		Vector3(-spawn_radius * 0.8, 2.0, -spawn_radius * 0.8),
-		Vector3(spawn_radius * 0.8, 2.0, -spawn_radius * 0.8),
-		Vector3(-spawn_radius * 0.8, 2.0, spawn_radius * 0.8),
-		Vector3(spawn_radius * 0.8, 2.0, spawn_radius * 0.8)
+	# Fallback: if can't find good position, use safe spawn points within map bounds
+	var safe_spawns = [
+		Vector3(-8.0, 2.0, -8.0),
+		Vector3(8.0, 2.0, -8.0),
+		Vector3(-8.0, 2.0, 8.0),
+		Vector3(8.0, 2.0, 8.0),
+		Vector3(0.0, 2.0, -10.0),
+		Vector3(0.0, 2.0, 10.0)
 	]
 	
-	return corners[existing_players.size() % corners.size()]
+	return safe_spawns[existing_players.size() % safe_spawns.size()]
 
 func toggle_ready():
 	var my_id = multiplayer.get_unique_id()

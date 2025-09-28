@@ -392,7 +392,7 @@ func show_radar_ping(pinging_player: String, ping_position: Vector3):
 		
 		# Fade back to normal
 		var color_tween = create_tween()
-		color_tween.tween_delay(3.0)
+		color_tween.tween_interval(3.0)
 		color_tween.tween_property(label_3d, "modulate", original_modulate, 0.5)
 
 @rpc("any_peer", "call_local", "reliable")
@@ -415,7 +415,7 @@ func show_emergency_radar_ping(pinging_player: String, ping_position: Vector3):
 		
 		# Fade back to normal
 		var color_tween = create_tween()
-		color_tween.tween_delay(2.0)
+		color_tween.tween_interval(2.0)
 		color_tween.tween_property(label_3d, "modulate", original_modulate, 0.5)
 
 func hide_radar_ping():

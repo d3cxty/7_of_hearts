@@ -22,15 +22,15 @@ func setup_ui():
 	
 	setup_horror_theme()
 	
-	# Add padding to the container
-	player_list.add_theme_constant_override("separation", 12)
-	player_list.position = Vector2(20, 20)
+	# Add padding to the container - MINIMIZED
+	player_list.add_theme_constant_override("separation", 4)
+	player_list.position = Vector2(10, 10)
 	
-	# Horror-themed background panel
+	# Horror-themed background panel - MUCH SMALLER
 	var bg_panel = Panel.new()
 	bg_panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
-	bg_panel.position = Vector2(10, 10)
-	bg_panel.size = Vector2(500, 400)
+	bg_panel.position = Vector2(5, 5)
+	bg_panel.size = Vector2(280, 180)
 	
 	# Dark horror-themed panel style
 	var style_box = StyleBoxFlat.new()
@@ -47,26 +47,26 @@ func setup_ui():
 	bg_panel.add_theme_stylebox_override("panel", style_box)
 	add_child(bg_panel)
 	
-	# Create title header
+	# Create title header - MINIMIZED
 	var title_label = Label.new()
-	title_label.text = "🕵️ HIDE & SEEK 🔍"
+	title_label.text = "🎭 HIDE & SEEK"
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title_label.add_theme_font_size_override("font_size", 32)
+	title_label.add_theme_font_size_override("font_size", 18)  # Smaller
 	title_label.add_theme_color_override("font_color", Color(0.8, 0.4, 0.1, 1.0))  # Rusty orange
 	title_label.add_theme_color_override("font_shadow_color", Color(0.1, 0.05, 0.02, 1.0))
-	title_label.add_theme_constant_override("shadow_offset_x", 3)
-	title_label.add_theme_constant_override("shadow_offset_y", 3)
+	title_label.add_theme_constant_override("shadow_offset_x", 1)
+	title_label.add_theme_constant_override("shadow_offset_y", 1)
 	player_list.add_child(title_label)
 	
-	# Timer with horror styling
+	# Timer with horror styling - MINIMIZED
 	timer_label = Label.new()
-	timer_label.text = "⌛ Hunt Time: 03:00"
+	timer_label.text = "⌛ 03:00"
 	timer_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	timer_label.add_theme_font_size_override("font_size", 26)
+	timer_label.add_theme_font_size_override("font_size", 16)  # Smaller
 	timer_label.add_theme_color_override("font_color", Color(0.9, 0.7, 0.3, 1.0))  # Warm yellow
 	timer_label.add_theme_color_override("font_shadow_color", Color(0.2, 0.1, 0.05, 1.0))
-	timer_label.add_theme_constant_override("shadow_offset_x", 2)
-	timer_label.add_theme_constant_override("shadow_offset_y", 2)
+	timer_label.add_theme_constant_override("shadow_offset_x", 1)
+	timer_label.add_theme_constant_override("shadow_offset_y", 1)
 	player_list.add_child(timer_label)
 
 func setup_horror_theme():
@@ -154,15 +154,15 @@ func setup_horror_theme():
 	announcement_label.custom_minimum_size.x = 350
 	player_list.add_child(announcement_label)
 	
-	# Create radar timer display
+	# Create radar timer display - MINIMIZED
 	radar_timer_label = Label.new()
-	radar_timer_label.text = "📡 Next Radar Ping: 30s"
+	radar_timer_label.text = "📡 30s"
 	radar_timer_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	radar_timer_label.add_theme_font_size_override("font_size", 16)
+	radar_timer_label.add_theme_font_size_override("font_size", 12)  # Smaller
 	radar_timer_label.add_theme_color_override("font_color", Color(0.2, 1.0, 0.2, 1.0))  # Radar green
 	radar_timer_label.add_theme_color_override("font_shadow_color", Color.BLACK)
-	radar_timer_label.add_theme_constant_override("shadow_offset_x", 2)
-	radar_timer_label.add_theme_constant_override("shadow_offset_y", 2)
+	radar_timer_label.add_theme_constant_override("shadow_offset_x", 1)
+	radar_timer_label.add_theme_constant_override("shadow_offset_y", 1)
 	player_list.add_child(radar_timer_label)
 
 func start_game():
@@ -209,7 +209,7 @@ func _process(delta):
 func update_timer_display():
 	var minutes = int(game_timer / 60)
 	var seconds = int(game_timer) % 60
-	timer_label.text = "⏰ Time: %02d:%02d" % [minutes, seconds]
+	timer_label.text = "⌛ %02d:%02d" % [minutes, seconds]  # Shorter format
 	
 	# Change color based on remaining time
 	if game_timer <= 30:
@@ -333,7 +333,7 @@ func update_radar_timer_display():
 	if local_player and local_player.has_method("get_radar_time_remaining"):
 		var time_remaining = local_player.get_radar_time_remaining()
 		if time_remaining > 0:
-			radar_timer_label.text = "📡 Next Radar Ping: " + str(int(time_remaining)) + "s"
+			radar_timer_label.text = "📡 " + str(int(time_remaining)) + "s"  # Shorter text
 			# Change color as timer gets low
 			if time_remaining <= 5:
 				radar_timer_label.add_theme_color_override("font_color", Color.YELLOW)
@@ -342,5 +342,5 @@ func update_radar_timer_display():
 			else:
 				radar_timer_label.add_theme_color_override("font_color", Color(0.2, 1.0, 0.2, 1.0))
 		else:
-			radar_timer_label.text = "📡 RADAR PING ACTIVE!"
+			radar_timer_label.text = "📡 PING!"  # Much shorter
 			radar_timer_label.add_theme_color_override("font_color", Color.RED)

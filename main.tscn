@@ -1680,6 +1680,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4445, 0.154732, 12.365)
 [node name="StaticBody3D39" parent="GameWorld/FLOORS/interior_floor9" instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4471, 0.154732, 12.365)
 
+[node name="StaticBody3D59" parent="GameWorld/FLOORS/interior_floor9" instance=ExtResource("5_lquwl")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 7.4418583, 0.154732, 19.680378)
+
+[node name="StaticBody3D60" parent="GameWorld/FLOORS/interior_floor9" instance=ExtResource("5_lquwl")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 11.444498, 0.154732, 19.680378)
+
+[node name="StaticBody3D61" parent="GameWorld/FLOORS/interior_floor9" instance=ExtResource("5_lquwl")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 15.447098, 0.154732, 19.680378)
+
 [node name="StaticBody3D40" parent="GameWorld/FLOORS/interior_floor9" instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4337, 0.154732, 12.365)
 
